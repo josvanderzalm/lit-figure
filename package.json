@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "echarts": "^5.6.0",
+    "highcharts": "^12.2.0",
     "lit": "^3.2.1"
   },
   "devDependencies": {
+    "@types/echarts": "^4.9.22",
     "typescript": "~5.7.2",
     "vite": "^6.3.1"
   }

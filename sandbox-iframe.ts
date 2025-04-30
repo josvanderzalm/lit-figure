@@ -1,4 +1,4 @@
-let figureWrapperElement = null;
+let figureWrapperElement: HTMLElement & { options: any } | null = null;
 
 window.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'options') {

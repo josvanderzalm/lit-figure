@@ -1,13 +1,13 @@
-// Highcharts Line
+// Highcharts Sankey
 import { customElement } from 'lit/decorators.js';
 import { BaseChart } from '../base-chart';
 
-@customElement('highcharts-line')
-export class HighchartsLine extends BaseChart {
+@customElement('highcharts-sankey')
+export class HighchartsSankey extends BaseChart {
   async renderChart(container: HTMLElement) {
     const Highcharts = (await import('highcharts')).default;
-     await import('highcharts/modules/exporting');
-    //lineModule.default(Highcharts);
+    const sankey = await import('highcharts/modules/sankey');
+    sankey.default(Highcharts);
 
     Highcharts.chart(container, {
       ...this.config,

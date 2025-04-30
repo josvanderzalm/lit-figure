@@ -1,12 +1,12 @@
-// ECharts Line
+// ECharts Map
 import { customElement } from 'lit/decorators.js';
 import { BaseChart } from '../base-chart';
 
-@customElement('echarts-line')
-export class EchartsLine extends BaseChart {
+@customElement('echarts-map')
+export class EchartsMap extends BaseChart {
   // async renderChart(container: HTMLElement) {
-  //   // const { default: ECharts } = await import('echarts');
-  //   // const instance = ECharts.init(container);
+  //   // const echartsModule = await import('echarts');
+  //   // const instance = echartsModule.default.init(container);
   //   // instance.setOption({
   //   //   ...this.config,
   //   //   series: this.data.series || []

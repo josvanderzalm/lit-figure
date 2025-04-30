@@ -27,7 +27,7 @@ export class VizChart extends LitElement {
   }
 
   async loadRenderer() {
-    const loader = registry[this.library]?.[this.type];
+    const loader = (registry as Record<string, Record<string, () => Promise<(props: any) => unknown>>>)[this.library]?.[this.type];
     if (loader) {
       this._renderer = await loader();
       this.requestUpdate();
