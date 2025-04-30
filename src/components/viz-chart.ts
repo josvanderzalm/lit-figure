@@ -1,7 +1,7 @@
 // src/components/viz-chart.ts
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { registry } from '../registry';
+import { registry } from './registry';
 
 @customElement('viz-chart')
 export class VizChart extends LitElement {
