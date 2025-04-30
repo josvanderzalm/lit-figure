@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/echarts": "^4.9.22",
     "typescript": "~5.7.2",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

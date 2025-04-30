@@ -1,10 +1,12 @@
-// src/components/viz-chart.ts
+// src/components/rivm-smvd-figure.ts
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { registry } from './registry';
 
-@customElement('viz-chart')
-export class VizChart extends LitElement {
+import '@/components/sandbox/sandbox-iframe';
+
+@customElement('rivm-smvd-figure')
+export class RivmSmvdFigure extends LitElement {
   @property({ type: String }) library = '';
   @property({ type: String }) type = '';
   @property({ type: Object }) config: any = {};

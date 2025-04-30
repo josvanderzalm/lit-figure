@@ -1,2 +1,2 @@
 // src/main.ts
-import './components/viz-chart.ts'
+import './components/rivm-smvd-figure'
