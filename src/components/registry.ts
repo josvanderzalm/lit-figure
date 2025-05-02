@@ -1,7 +1,11 @@
-// src/registry.ts
 import { html } from 'lit';
 
 export const registry = {
+  sandbox: async () => {
+    await import('./sandbox/sandbox-iframe.js');
+    return (props: any) =>
+      html`<sandbox-iframe .config=${props.config} .data=${props.data}></sandbox-iframe>`;
+  },
   highcharts: {
     line: async () => {
       await import('./highcharts/highcharts-line.js');

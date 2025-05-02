@@ -1,0 +1,19 @@
+{
+    "data-src": "./data/kinkhoest_small_multiples.json",
+    "x-key": "year",
+    "y-key": "value",
+    "group-by": "categorie",
+    "group-by-label": "Categorie",
+    "type": "small-multiple",
+    "library": "highcharts",
+    "noconflict": false,
+    "title": "XXXXXX Meldingen van baby's met kinkhoest per maand, 2018-2025",
+    "subtitle": "Periode 2018-2025",
+    "source": "Bron: RIVM, Osiris",
+    "x-axis": {
+
+    },
+    "y-axis": {
+      "title": "Aantal"
+    }
+  }

@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Lit3 Visualization Example</title>
-    <script type="module" src="/src/main.ts"></script>
 
-  </head>
-  <body>
-    <h1>Example: Single Line Chart</h1>
-    <rivm-smvd-figure id="chart1" library="highcharts" type="line"></rivm-smvd-figure>
+<head>
+  <meta charset="UTF-8" />
+  <title>Lit3 Visualization Example</title>
+  <script type="module" src="/src/main.ts"></script>
 
-    <h1>Example: Composite Chart (separate series)</h1>
-    <rivm-smvd-figure id="chart2" library="highcharts" type="line"></rivm-smvd-figure>
+</head>
 
-    <script type="module">
-      const chart1 = document.getElementById('chart1');
-      chart1.config = { title: { text: 'Example Chart' } };
-      chart1.data = {
-        series: [
-          {
-            name: 'Sales',
-            data: [10, 20, 30, 40],
-          },
-        ],
+<body>
+  <h1>Example: Single Line Chart</h1>
+  <rivm-smvd-figure id="chart1" library="highcharts" type="line"></rivm-smvd-figure>
+
+  <h1>Example: Composite Chart (separate series)</h1>
+  <rivm-smvd-figure id="chart2" library="highcharts" type="line"></rivm-smvd-figure>
+
+  <script type="module">
+    const chart1 = document.getElementById('chart1');
+    chart1.config = { title: { text: 'Example Chart' } };
+    chart1.data = {
+      series: [
+        {
+          name: 'Sales',
+          data: [10, 20, 30, 40],
+        },
+      ],
+    };
+
+    const chart2 = document.getElementById('chart2');
+    chart2.config = {};
+    chart2.data = {
+      series: [
+        { name: 'Series A', data: [5, 15, 25] },
+        { name: 'Series B', data: [10, 20, 30] },
+      ],
+    };
+  </script>
+
+  <!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+  <script defer>
+    (function (currentScript) {
+      const options = {
+        "config-src": "http://localhost:5173/config/small-multiple.json",
       };
+      currentScript.parentNode.insertBefore(
+        Object.assign(document.createElement("rivm-smvd-figure"), { options }),
+        currentScript.nextSibling
+      );
+    })(document.currentScript);
 
-      const chart2 = document.getElementById('chart2');
-      chart2.config = {};
-      chart2.data = {
-        series: [
-          { name: 'Series A', data: [5, 15, 25] },
-          { name: 'Series B', data: [10, 20, 30] },
-        ],
+  </script>
+  <!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+
+  <!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+  <script defer>
+    (function (currentScript) {
+      const options = {
+        "config-src": "http://localhost:5173/config/figure.json",
       };
-    </script>
-  </body>
+      currentScript.parentNode.insertBefore(
+        Object.assign(document.createElement("rivm-smvd-figure"), { options }),
+        currentScript.nextSibling
+      );
+    })(document.currentScript);
+
+  </script>
+  <!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+
+</body>
+
 </html>

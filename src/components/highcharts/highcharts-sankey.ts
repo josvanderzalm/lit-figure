@@ -1,6 +1,6 @@
 // Highcharts Sankey
 import { customElement } from 'lit/decorators.js';
-import { BaseChart } from '../base-chart';
+import { BaseChart } from '../base/base-chart';
 
 @customElement('highcharts-sankey')
 export class HighchartsSankey extends BaseChart {

@@ -1,6 +1,6 @@
 // Highcharts Map
 import { customElement } from 'lit/decorators.js';
-import { BaseChart } from '../base-chart';
+import { BaseChart } from '../base/base-chart';
 
 @customElement('highcharts-map')
 export class HighchartsMap extends BaseChart {

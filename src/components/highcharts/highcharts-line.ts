@@ -1,6 +1,6 @@
 // Highcharts Line
 import { customElement } from 'lit/decorators.js';
-import { BaseChart } from '../base-chart';
+import { BaseChart } from '../base/base-chart';
 
 @customElement('highcharts-line')
 export class HighchartsLine extends BaseChart {
