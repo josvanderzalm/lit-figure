@@ -7,7 +7,7 @@ import '@/components/sandbox/sandbox-iframe';
 
 import type { Options } from '@/types';
 
-@customElement('rivm-smvd-figure')
+@customElement('rivm-smdv-figure')
 export class RivmSmvdFigure extends LitElement {
   @property({ type: Object }) options: Options = {};
 
@@ -61,7 +61,7 @@ export class RivmSmvdFigure extends LitElement {
   }
 
   async loadRenderer() {
-    const loader = (registry as Record<string, Record<string, () => Promise<(props: any) => unknown>>>)[this.library]?.[this.type];
+    const loader = ((registry as unknown) as Record<string, Record<string, () => Promise<(props: any) => unknown>>>)[this.library]?.[this.type];
     if (loader) {
       this._renderer = await loader();
       this.requestUpdate();

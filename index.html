@@ -3,69 +3,207 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Lit3 Visualization Example</title>
+  <title>SMDV componet</title>
   <script type="module" src="/src/main.ts"></script>
 
 </head>
 
 <body>
-  <h1>Example: Single Line Chart</h1>
-  <rivm-smvd-figure id="chart1" library="highcharts" type="line"></rivm-smvd-figure>
 
-  <h1>Example: Composite Chart (separate series)</h1>
-  <rivm-smvd-figure id="chart2" library="highcharts" type="line"></rivm-smvd-figure>
+  <h1>SMDV figure</h1>
 
-  <script type="module">
-    const chart1 = document.getElementById('chart1');
-    chart1.config = { title: { text: 'Example Chart' } };
-    chart1.data = {
-      series: [
-        {
-          name: 'Sales',
-          data: [10, 20, 30, 40],
-        },
-      ],
+<!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+<script>
+  (function (currentScript) {
+    console.log(currentScript);
+    console.log(currentScript.parentNode)
+
+    const options = {
+      "config-src": "http://localhost:5173/config/small-multiple.json",
     };
+    currentScript.parentNode.insertBefore(
+      Object.assign(document.createElement("rivm-smdv-figure"), { options }),
+      currentScript.nextSibling
+    );
+  })(document.currentScript);
 
-    const chart2 = document.getElementById('chart2');
-    chart2.config = {};
-    chart2.data = {
-      series: [
-        { name: 'Series A', data: [5, 15, 25] },
-        { name: 'Series B', data: [10, 20, 30] },
-      ],
+</script>
+<!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+
+<!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+<script>
+  (function (currentScript) {
+    const options = {
+      "config-src": "http://localhost:5173/config/figure.json",
     };
-  </script>
+    currentScript.parentNode.insertBefore(
+      Object.assign(document.createElement("rivm-smdv-figure"), { options }),
+      currentScript.nextSibling
+    );
+  })(document.currentScript);
 
-  <!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
-  <script defer>
-    (function (currentScript) {
-      const options = {
-        "config-src": "http://localhost:5173/config/small-multiple.json",
-      };
-      currentScript.parentNode.insertBefore(
-        Object.assign(document.createElement("rivm-smvd-figure"), { options }),
-        currentScript.nextSibling
-      );
-    })(document.currentScript);
+</script>
+<!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
 
-  </script>
-  <!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+<!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+<script>
+  (function (currentScript) {
+    const options = {
+      "data-src": "./data/kinkhoestmeldingen.json",
+      "x-key": "Datum",
+      "y-key": "Meldingen",
+      "type": "column",
+      "library": "highcharts",
+      "noconflict": true,
+      "title": "Kinkhoestmeldingen per maand, 2018-2025",
+      "source": "Bron: RIVM, Osiris",
+      "x-axis": {l
+        "zones": [
+          {
+            "from": "2020-03-01",
+            "to": "2022-03-01",
+            "label": "periode met corona maatregelen"
+          },
+          {
+            "from": "2024-11-01",
+            "to": "2025-01-01",
+            "label": "Voorlopige cijfers"
+          }
+        ]
+      },
+      "y-axis": {
+        "title": "Aantal"
+      }
+    };
+    currentScript.parentNode.insertBefore(
+      Object.assign(document.createElement("rivm-smdv-figure"), { options }),
+      currentScript.nextSibling
+    );
+  })(document.currentScript);
 
-  <!-- Chart Kinkhoestmeldingen per maand, 2018-2025 -->
-  <script defer>
-    (function (currentScript) {
-      const options = {
-        "config-src": "http://localhost:5173/config/figure.json",
-      };
-      currentScript.parentNode.insertBefore(
-        Object.assign(document.createElement("rivm-smvd-figure"), { options }),
-        currentScript.nextSibling
-      );
-    })(document.currentScript);
+</script>
+<!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
 
-  </script>
-  <!-- EOF Chart Kinkhoestmeldingen per maand, 2018-2025 -->
+<!-- Chart Meldingen van baby's met kinkhoest per maand, 2018-2025 -->
+<script>
+  (function (currentScript) {
+    const options = {
+      "data-src": "./data/kinkhoestmeldingen.json",
+      "x-key": "Datum",
+      "y-key": "Meldingen_zuigelingen",
+      "type": "column",
+      "library": "echarts",
+      "title": "Meldingen van baby's met kinkhoest per maand, 2018-2025",
+      "subtitle": "Periode 2018-2025",
+      "source": "Bron: RIVM, Osiris",
+      "x-axis": {
+        "zones": [
+          {
+            "from": "2020-03-01",
+            "to": "2022-03-01",
+            "label": "periode met corona maatregelen"
+          },
+          {
+            "from": "2024-11-01",
+            "to": "2025-01-01",
+            "label": "Voorlopige cijfers"
+          }
+        ]
+      },
+      "y-axis": {
+        "title": "Aantal"
+      }
+    };
+    currentScript.parentNode.insertBefore(
+      Object.assign(document.createElement("rivm-smdv-figure"), { options }),
+      currentScript.nextSibling
+    );
+  })(document.currentScript);
+
+</script>
+<!-- EOF Meldingen van baby's met kinkhoest per maand, 2018-2025 -->
+
+<!-- Chart Meldingen van baby's met kinkhoest per maand, 2018-2025 -->
+<script>
+  (function (currentScript) {
+    const options = {
+      "data-src": "./data/kinkhoestmeldingen.json",
+      "x-key": "Datum",
+      "y-key": "Meldingen_zuigelingen",
+      "type": "column",
+      "noconflict": false,
+      "title": "Meldingen van baby's met kinkhoest per maand, 2018-2025",
+      "subtitle": "Periode 2018-2025",
+      "source": "Bron: RIVM, Osiris",
+      "x-axis": {
+        "zones": [
+          {
+            "from": "2020-03-01",
+            "to": "2022-03-01",
+            "label": "periode met corona maatregelen"
+          },
+          {
+            "from": "2024-11-01",
+            "to": "2025-01-01",
+            "label": "Voorlopige cijfers"
+          }
+        ]
+      },
+      "y-axis": {
+        "title": "Aantal"
+      }
+    };
+    currentScript.parentNode.insertBefore(
+      Object.assign(document.createElement("rivm-smdv-figure"), { options }),
+      currentScript.nextSibling
+    );
+  })(document.currentScript);
+
+</script>
+<!-- EOF Meldingen van baby's met kinkhoest per maand, 2018-2025 -->
+
+
+<!-- Chart Meldingen van baby's met kinkhoest per maand, 2018-2025 -->
+<script>
+  (function (currentScript) {
+    const options = {
+      "data-src": "./data/kinkhoestmeldingenjaar.json",
+      "x-key": "Jaar",
+      "y-key": "Meldingen",
+      "type": "column",
+      "library": "echarts",
+      "title": "Kinkhoestmeldingen per jaar, 2004-2024",
+      "source": "",
+      "x-axis": {
+        "type": "datetime",
+        "zones": [
+          {
+            "type": "plotZone",
+            "from": "2020-03-01",
+            "to": "2022-03-01",
+            "label": "periode met corona maatregelen"
+          },
+          {
+            "type": "dataZone",
+            "from": "2023-6-01",
+            "to": "2025-01-01"
+          }
+        ]
+      },
+      "y-axis": {
+        "title": "Aantal"
+      }
+    };
+    currentScript.parentNode.insertBefore(
+      Object.assign(document.createElement("rivm-smdv-figure"), { options }),
+      currentScript.nextSibling
+    );
+  })(document.currentScript);
+
+</script>
+<!-- EOF Meldingen van baby's met kinkhoest per maand, 2018-2025 -->
+
+
 
 </body>
 
