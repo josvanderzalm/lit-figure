@@ -1,2 +1,2 @@
 // src/main.ts
-import "./components/rivm-smdv-figure";
+import './components/rivm-smdv-figure';

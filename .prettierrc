@@ -1,7 +1,5 @@
 {
-    "plugins": [
-        "@ianvs/prettier-plugin-sort-imports"
-    ],
+    "plugins": ["@ianvs/prettier-plugin-sort-imports"],
     "importOrder": [
         "<BUILTIN_MODULES>",
         "<THIRD_PARTY_MODULES>",
@@ -10,10 +8,11 @@
         "",
         "^[./]"
     ],
-    "importOrderParserPlugins": [
-        "typescript",
-        "decorators-legacy"
-    ],
+    "importOrderParserPlugins": ["typescript", "decorators-legacy"],
     "importOrderTypeScriptVersion": "5.0.0",
-    "importOrderCaseSensitive": false
+    "importOrderCaseSensitive": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "useTabs": false
 }
