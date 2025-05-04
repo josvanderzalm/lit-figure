@@ -1,12 +1,12 @@
 {
-  "name": "register-test",
+  "name": "rivm-smdv-figure",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "vite:dev": "vite",
+    "vite:build": "tsc && vite build",
+    "vite:preview": "vite preview",
     "prepare": "husky",
     "lint": "eslint \"**/*.{js,ts}\"",
     "prettier": "prettier --write \"**/*.{js,ts,json,css,md}\""
