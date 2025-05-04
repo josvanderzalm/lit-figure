@@ -1,19 +1,28 @@
-// src/components/highcharts/highcharts-composite.ts
-import { LitElement, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, LitElement } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
-@customElement('highcharts-composite')
+import type { DataArray, Options } from "@/types";
+
+@customElement("highcharts-composite")
 export default class HighchartsComposite extends LitElement {
-  @property({ type: Object }) config: any;
-  @property({ type: Object }) data: any;
+  @property({ type: Object }) config!: Options; // Use definite assignment assertion
+  @property({ type: Array }) data!: DataArray; // Use definite assignment assertion
 
   render() {
-    const seriesList = this.data.series || [];
-    console.log(seriesList)
+    // Ensure that 'data' is an array and has a 'series' property
+    const seriesList = Array.isArray(this.data[0]?.series)
+      ? this.data[0]?.series
+      : [];
+    console.log(seriesList);
     return html`
-      ${seriesList.map((series: any) => html`
-        <chart-highcharts-line .config=${this.config} .data=${{ series: [series] }}></chart-highcharts-line>
-      `)}
+      ${seriesList.map(
+        (series: { [key: string]: string | number }) => html`
+          <chart-highcharts-line
+            .config=${this.config}
+            .data=${{ series: [series] }}
+          ></chart-highcharts-line>
+        `,
+      )}
     `;
   }
 }

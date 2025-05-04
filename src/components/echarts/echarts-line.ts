@@ -1,8 +1,9 @@
 // ECharts Line
-import { customElement } from 'lit/decorators.js';
-import { BaseChart } from '../base/base-chart';
+import { customElement } from "lit/decorators.js";
 
-@customElement('echarts-line')
+import { BaseChart } from "../base/base-chart";
+
+@customElement("echarts-line")
 export class EchartsLine extends BaseChart {
   // async renderChart(container: HTMLElement) {
   //   // const { default: ECharts } = await import('echarts');

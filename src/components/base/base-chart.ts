@@ -1,22 +1,29 @@
-// BaseChart.ts (shared base for both Highcharts and ECharts)
-import { LitElement, html } from 'lit';
+import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
-export class BaseChart extends LitElement {
-  @property({ type: Object }) config: any = {};
-  @property({ type: Object }) data: any = {};
+import type { DataArray, Options } from "@/types";
 
-  protected renderChart(_container: HTMLElement): void {
+export class BaseChart extends LitElement {
+  @property({ type: Object }) config: Options = {}; // Specify correct type
+  @property({ type: Array }) data: DataArray = []; // Specify correct type
+
+  // Protected method for rendering the chart, to be implemented by subclasses
+  protected renderChart(container: HTMLElement): void {
+    console.log(container);
     // Implement in subclass
   }
 
+  // Called after the first render
   firstUpdated() {
-    this.renderChart(this.shadowRoot!.getElementById('container')!);
+    const container = this.shadowRoot!.getElementById("container")!;
+    this.renderChart(container);
   }
 
+  // Called when the component is updated
   updated(changed: Map<string, unknown>) {
-    if (changed.has('config') || changed.has('data')) {
-      this.renderChart(this.shadowRoot!.getElementById('container')!);
+    if (changed.has("config") || changed.has("data")) {
+      const container = this.shadowRoot!.getElementById("container")!;
+      this.renderChart(container);
     }
   }
 

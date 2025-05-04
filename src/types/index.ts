@@ -7,6 +7,24 @@ export type { EchartsOptions, HighchartsOptions };
 // Optional: Stronger type for data items
 export type DataItem = Record<string, unknown>;
 
+// data array
+export type DataArray = { [key: string]: string | number }[];
+
+// Renderer props
+export type RendererProps = {
+  config: Options;
+  data: DataArray;
+};
+
+// Renderer function type
+export type RendererFunction = (props: RendererProps) => unknown;
+
+// Registry for dynamic imports
+export type Registry = Record<
+  string,
+  Record<string, () => Promise<RendererFunction>>
+>;
+
 // Axis configuration
 export interface AxisZone {
   /** Start of the zone (e.g., date or number) */
@@ -29,7 +47,7 @@ export interface AxisOptions {
 }
 
 // Main configuration object
-export interface Options<T = DataItem> {
+export interface Options {
   /** Charting library to use */
   library?: "highcharts" | "echarts";
 
@@ -43,7 +61,7 @@ export interface Options<T = DataItem> {
   configSrc?: string;
 
   /** Dataset to render */
-  dataSet?: Array<T>;
+  dataSet?: DataArray;
 
   /** Enable iframe sandboxing for isolation */
   sandbox?: boolean;

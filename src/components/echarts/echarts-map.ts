@@ -1,8 +1,9 @@
 // ECharts Map
-import { customElement } from 'lit/decorators.js';
-import { BaseChart } from '../base/base-chart';
+import { customElement } from "lit/decorators.js";
 
-@customElement('echarts-map')
+import { BaseChart } from "../base/base-chart";
+
+@customElement("echarts-map")
 export class EchartsMap extends BaseChart {
   // async renderChart(container: HTMLElement) {
   //   // const echartsModule = await import('echarts');
