@@ -8,8 +8,10 @@
         "vite:build": "tsc && vite build",
         "vite:preview": "vite preview",
         "prepare": "husky",
-        "lint": "eslint \"**/*.{js,ts}\"",
-        "prettier": "prettier --write \"**/*.{js,ts,json,css,md}\""
+        "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
+        "lint:eslint": "eslint 'src/**/*.ts'",
+        "lint:lit-analyzer": "lit-analyzer",
+        "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write"
     },
     "dependencies": {
         "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
@@ -27,6 +29,7 @@
         "globals": "^16.0.0",
         "husky": "^9.1.7",
         "lint-staged": "^15.5.1",
+        "lit-analyzer": "^2.0.3",
         "prettier": "^3.5.3",
         "typescript": "~5.7.2",
         "typescript-eslint": "^8.31.1",
