@@ -72,6 +72,9 @@ export interface Options {
     /** Key used for y-axis (e.g., field name or aggregated value) */
     yKey?: string;
 
+    /** Key used for pivoting data (e.g., field name) */
+    pivotField?: string;
+
     /** Label for x-axis */
     xLabel?: string;
 
