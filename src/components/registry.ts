@@ -3,13 +3,15 @@ import { html } from 'lit';
 import type { RendererProps } from '@/types';
 
 export const registry = {
-    sandbox: async () => {
-        await import('./sandbox/sandbox-iframe.js');
-        return (props: RendererProps) =>
-            html`<sandbox-iframe
-                .config=${props.config}
-                .data=${props.data}
-            ></sandbox-iframe>`;
+    common: {
+        sandbox: async () => {
+            await import('./sandbox/sandbox-iframe.js');
+            return (props: RendererProps) =>
+                html`<sandbox-iframe
+                    .config=${props.config}
+                    .data=${props.data}
+                ></sandbox-iframe>`;
+        },
     },
     highcharts: {
         line: async () => {

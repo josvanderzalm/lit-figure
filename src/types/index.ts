@@ -45,6 +45,21 @@ export interface AxisOptions {
     /** Optional highlight zones */
     zones?: AxisZone[];
 }
+// Request options
+export interface RequestOptions {
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
+    url: string;
+    headers?: HeadersInit;
+    body?: BodyInit | null;
+    mode?: RequestMode;
+    credentials?: RequestCredentials;
+    cache?: RequestCache;
+    redirect?: RequestRedirect;
+    referrer?: string;
+    integrity?: string;
+    keepalive?: boolean;
+    signal?: AbortSignal | null;
+}
 
 // Main configuration object
 export interface Options {
@@ -93,18 +108,10 @@ export interface Options {
     /** Chart type (e.g., "line", "bar", "sankey") */
     type?: string;
 
-    /**
-     * CSS height of the chart container.
-     * - Can be a string like `"400px"`, `"50%"`, or a raw number interpreted as pixels.
-     * - Example: `"100%"` or `400` (which becomes `"400px"`).
-     */
+    /** Height of the chart container; accepts a string (e.g., "400px", "50%") or a number (e.g., 400 → "400px"). */
     height?: string | number;
 
-    /**
-     * CSS width of the chart container.
-     * - Can be a string like `"400px"`, `"50%"`, or a raw number interpreted as pixels.
-     * - Example: `"100%"` or `400` (which becomes `"400px"`).
-     */
+    //** Width of the chart container; accepts a string (e.g., "400px", "50%") or a number (e.g., 400 → "400px"). */
     width?: string | number;
 
     /** X-axis configuration */

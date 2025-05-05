@@ -1,4 +1,4 @@
-import { initReq } from "./initReq";
-import { toJson } from "./toJson";
+import { initReq } from './init-req';
+import { toJson } from './to-json';
 
 export { initReq, toJson };
