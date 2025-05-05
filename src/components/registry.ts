@@ -5,7 +5,7 @@ import type { RendererProps } from '@/types';
 export const registry = {
     common: {
         sandbox: async () => {
-            await import('./sandbox/sandbox-iframe.js');
+            await import('./common/sandbox/sandbox-iframe.js');
             return (props: RendererProps) =>
                 html`<sandbox-iframe
                     .config=${props.config}

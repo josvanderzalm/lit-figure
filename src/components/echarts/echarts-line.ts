@@ -1,7 +1,7 @@
 // ECharts Line
 import { customElement } from 'lit/decorators.js';
 
-import { BaseChart } from '../base/base-chart';
+import { BaseChart } from '../common/base/base-chart';
 
 @customElement('echarts-line')
 export class EchartsLine extends BaseChart {

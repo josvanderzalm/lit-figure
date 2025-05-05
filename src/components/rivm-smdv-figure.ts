@@ -4,7 +4,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 
 import { registry } from './registry';
 
-import '@/components/sandbox/sandbox-iframe';
+import '@/components/common/sandbox/sandbox-iframe';
 
 import type { DataArray, Options, Registry, RendererProps } from '@/types';
 
