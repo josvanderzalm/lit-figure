@@ -12,8 +12,8 @@ export type DataArray = { [key: string]: string | number }[];
 
 // Renderer props
 export type RendererProps = {
-    config: Options;
-    data: DataArray;
+    options: Options;
+    data?: DataArray;
 };
 
 // Renderer function type
@@ -116,4 +116,13 @@ export interface Options {
 
     /** X-axis configuration */
     xAxis?: AxisOptions;
+
+    /** Y-axis configuration */
+    yAxis?: AxisOptions;
+
+    /** Keep note of config loaded status */
+    configFetched?: boolean;
+
+    /** Keep note of data loaded status */
+    dataFetched?: boolean;
 }

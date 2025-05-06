@@ -1,19 +1,21 @@
 // Highcharts Line
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import { BaseChart } from '../common/base/base-chart';
 
 @customElement('highcharts-line')
-export class HighchartsLine extends BaseChart {
+export class EchartsLine extends BaseChart {
     async renderChart(container: HTMLElement) {
-        const Highcharts = (await import('highcharts')).default;
-        await import('highcharts/modules/exporting');
-
-        console.log(container, Highcharts);
-
-        // Highcharts.chart(container, {
+        console.log(container);
+        // const { default: ECharts } = await import('echarts');
+        // const instance = ECharts.init(container);
+        // instance.setOption({
         //   ...this.config,
-        //   series: this.data.series || [],
+        //   series: this.data.series || []
         // });
+    }
+    render() {
+        return html`yyyyy`;
     }
 }

@@ -27,7 +27,10 @@ export class BaseChart extends LitElement {
         }
     }
 
-    render() {
-        return html`<div id="container" style="width:100%; height:100%"></div>`;
+    xrender() {
+        return html` <div
+            id="container"
+            style="width:100%; height:100%"
+        ></div>`;
     }
 }

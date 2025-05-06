@@ -53,7 +53,7 @@ export class SandboxIframe extends LitElement {
     render() {
         console.log('Options from sandbox-iframe', this.options);
         return html`
-            <p>Sandbox wrapper!</p>
+            <p>Sandbox wrapper! ${this.options?.title}</p>
             <iframe
                 src="./sandbox-iframe.html"
                 style="width: 100%; outline: 6px dashed rgba(0,0,0,0.2); border: none; height: ${this

@@ -5,6 +5,7 @@ let figureWrapperElement: (HTMLElement & { options: Options }) | null = null;
 window.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'options') {
         const options = event.data.data;
+        options.sandbox = false;
         addFigureWrapper(options);
     }
 });
@@ -19,7 +20,7 @@ function sendHeightToParent() {
 
 function addFigureWrapper(options) {
     figureWrapperElement = Object.assign(
-        document.createElement('figure-wrapper'),
+        document.createElement('rivm-smdv-figure'),
         { options },
     );
     document.body.appendChild(figureWrapperElement);

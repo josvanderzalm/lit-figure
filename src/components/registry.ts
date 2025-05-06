@@ -5,11 +5,10 @@ import type { RendererProps } from '@/types';
 export const registry = {
     common: {
         sandbox: async () => {
-            await import('./common/sandbox/sandbox-iframe.js');
+            await import('./common/sandbox/sandbox-wrapper.js');
             return (props: RendererProps) =>
                 html`<sandbox-iframe
-                    .config=${props.config}
-                    .data=${props.data}
+                    .options=${props.options}
                 ></sandbox-iframe>`;
         },
     },
@@ -18,16 +17,14 @@ export const registry = {
             await import('./highcharts/highcharts-line.js');
             return (props: RendererProps) =>
                 html`<highcharts-line
-                    .config=${props.config}
-                    .data=${props.data}
+                    .options=${props.options}
                 ></highcharts-line>`;
         },
         composite: async () => {
             await import('./highcharts/highcharts-composite.js');
             return (props: RendererProps) =>
                 html`<highcharts-composite
-                    .config=${props.config}
-                    .data=${props.data}
+                    .options=${props.options}
                 ></highcharts-composite>`;
         },
     },
@@ -35,17 +32,13 @@ export const registry = {
         line: async () => {
             await import('./echarts/echarts-line.js');
             return (props: RendererProps) =>
-                html`<echarts-line
-                    .config=${props.config}
-                    .data=${props.data}
-                ></echarts-line>`;
+                html`<echarts-line .options=${props.options}></echarts-line>`;
         },
         composite: async () => {
             await import('./echarts/echarts-composite.js');
             return (props: RendererProps) =>
                 html`<echarts-composite
-                    .config=${props.config}
-                    .data=${props.data}
+                    .options=${props.options}
                 ></echarts-composite>`;
         },
     },
