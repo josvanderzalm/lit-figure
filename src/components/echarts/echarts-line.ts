@@ -2,20 +2,14 @@
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { BaseChart } from '../common/base/base-chart';
+import { EchartsBase } from '@/components/echarts/echarts-base';
 
 @customElement('echarts-line')
-export class EchartsLine extends BaseChart {
+export class EchartsLine extends EchartsBase {
     async renderChart(container: HTMLElement) {
         console.log(container);
-        // const { default: ECharts } = await import('echarts');
-        // const instance = ECharts.init(container);
-        // instance.setOption({
-        //   ...this.config,
-        //   series: this.data.series || []
-        // });
     }
     render() {
-        return html`zzzzz`;
+        return html`Echarts-line`;
     }
 }

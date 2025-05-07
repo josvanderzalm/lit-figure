@@ -4,7 +4,7 @@ import { property } from 'lit/decorators.js';
 import type { DataArray, Options } from '@/types';
 
 export class BaseChart extends LitElement {
-    @property({ type: Object }) config: Options = {}; // Specify correct type
+    @property({ type: Object }) options: Options = {}; // Specify correct type
     @property({ type: Array }) data: DataArray = []; // Specify correct type
 
     // Protected method for rendering the chart, to be implemented by subclasses
@@ -27,10 +27,7 @@ export class BaseChart extends LitElement {
         }
     }
 
-    xrender() {
-        return html` <div
-            id="container"
-            style="width:100%; height:100%"
-        ></div>`;
+    render() {
+        return html`<div id="container" style="width:100%; height:100%"></div>`;
     }
 }

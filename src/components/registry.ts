@@ -34,12 +34,5 @@ export const registry = {
             return (props: RendererProps) =>
                 html`<echarts-line .options=${props.options}></echarts-line>`;
         },
-        composite: async () => {
-            await import('./echarts/echarts-composite.js');
-            return (props: RendererProps) =>
-                html`<echarts-composite
-                    .options=${props.options}
-                ></echarts-composite>`;
-        },
     },
 };

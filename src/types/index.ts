@@ -75,6 +75,12 @@ export interface Options {
     /** URL to external config source (JSON) */
     configSrc?: string;
 
+    /** The color scheme to use */
+    colorScheme?: 'standard' | 'gender' | 'gender-alternative';
+
+    /** Offset for color scheme */
+    colorSchemeOffset?: number;
+
     /** Dataset to render */
     dataSet?: DataArray;
 

@@ -8,7 +8,7 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 
 export default defineConfig([
-    globalIgnores(['dist/**/*', 'node_modules/**/*']),
+    // globalIgnores(['dist/**/*', 'node_modules/**/*']),
     {
         files: ['**/*.{js,mjs,cjs,ts}'],
         plugins: { js },
