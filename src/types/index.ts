@@ -13,6 +13,14 @@ export type DataArray = { [key: string]: string | number }[];
 // Renderer function type
 export type RendererFunction = () => unknown;
 
+export type RendererProps = {
+    /** Options for the chart */
+    options?: Options;
+    /** Data to be rendered */
+    data?: DataArray;
+    /** Optional callback for when the chart is ready */
+};
+
 // Registry for dynamic imports
 export type Registry = Record<
     string,
@@ -38,21 +46,6 @@ export interface AxisOptions {
     label?: string;
     /** Optional highlight zones */
     zones?: AxisZone[];
-}
-// Request options
-export interface RequestOptions {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
-    url: string;
-    headers?: HeadersInit;
-    body?: BodyInit | null;
-    mode?: RequestMode;
-    credentials?: RequestCredentials;
-    cache?: RequestCache;
-    redirect?: RequestRedirect;
-    referrer?: string;
-    integrity?: string;
-    keepalive?: boolean;
-    signal?: AbortSignal | null;
 }
 
 // Main configuration object

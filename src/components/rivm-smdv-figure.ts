@@ -9,8 +9,8 @@ import { registry } from './registry';
 export class RivmSmvdFigure extends LitElement {
     @property({ type: Object }) options: Options = {};
 
-    @state() private _renderer: ((props: RendererProps) => unknown) | null =
-        null;
+    // eslint-disable-next-line no-unused-vars
+    @state() private _renderer?: (options: RendererProps) => unknown;
     @state() private _isPreprocessingReady = false;
 
     error_message: string | null = null;
@@ -24,7 +24,7 @@ export class RivmSmvdFigure extends LitElement {
     }
 
     async loadRenderer() {
-        const typedRegistry = registry as Registry;
+        const typedRegistry = registry as unknown as Registry;
 
         let group: string | undefined;
         let componentType: string | undefined;

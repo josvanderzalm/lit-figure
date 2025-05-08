@@ -8,7 +8,7 @@ export const registry = {
             await import('./common/sandbox/sandbox-wrapper.js');
             return (props: RendererProps) =>
                 html`<sandbox-iframe
-                    .options=${props.options}
+                    .options=${props.options ?? {}}
                 ></sandbox-iframe>`;
         },
     },
@@ -17,14 +17,14 @@ export const registry = {
             await import('./highcharts/highcharts-line.js');
             return (props: RendererProps) =>
                 html`<highcharts-line
-                    .options=${props.options}
+                    .options=${props.options ?? {}}
                 ></highcharts-line>`;
         },
         composite: async () => {
             await import('./highcharts/highcharts-composite.js');
             return (props: RendererProps) =>
                 html`<highcharts-composite
-                    .options=${props.options}
+                    .options=${props.options ?? {}}
                 ></highcharts-composite>`;
         },
     },
@@ -32,7 +32,9 @@ export const registry = {
         line: async () => {
             await import('./echarts/echarts-line.js');
             return (props: RendererProps) =>
-                html`<echarts-line .options=${props.options}></echarts-line>`;
+                html`<echarts-line
+                    .options=${props.options ?? {}}
+                ></echarts-line>`;
         },
     },
 };
