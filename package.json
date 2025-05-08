@@ -1,7 +1,8 @@
 {
     "name": "rivm-smdv-figure",
-    "private": true,
     "version": "0.0.0",
+    "private": true,
+    "description": "Web component to render dynamic figures using Highcharts or ECharts",
     "type": "module",
     "scripts": {
         "vite:dev": "vite",
@@ -9,7 +10,7 @@
         "vite:preview": "vite preview",
         "prepare": "husky",
         "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
-        "lint:eslint": "eslint 'src/**/*.ts'",
+        "lint:eslint": "eslint 'src/**/*.ts' ",
         "lint:lit-analyzer": "lit-analyzer",
         "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.prettierignore --write"
     },
