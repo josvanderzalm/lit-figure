@@ -8,7 +8,8 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 
 export default defineConfig([
-    // globalIgnores(['dist/**/*', 'node_modules/**/*']),
+    globalIgnores(['dist/**/*', 'node_modules/**/*']),
+    tseslint.configs.recommended,
     {
         files: ['**/*.{js,mjs,cjs,ts}'],
         plugins: { js },
@@ -18,7 +19,6 @@ export default defineConfig([
         files: ['**/*.{js,mjs,cjs,ts}'],
         languageOptions: { globals: globals.browser },
     },
-    tseslint.configs.recommended,
     {
         files: ['**/*.json'],
         plugins: { json },

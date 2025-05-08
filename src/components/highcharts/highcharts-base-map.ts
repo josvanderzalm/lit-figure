@@ -1,6 +1,6 @@
 import type * as Highcharts from 'highcharts';
 
-import { HighchartsBase } from '@/components/highcharts/higcharts-base';
+import { HighchartsBase } from '@/components/highcharts/highcharts-base';
 
 export class HighchartsBaseMap extends HighchartsBase {
     protected highchartsDefaults: Highcharts.Options = {

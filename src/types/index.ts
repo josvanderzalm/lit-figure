@@ -10,14 +10,8 @@ export type DataItem = Record<string, unknown>;
 // data array
 export type DataArray = { [key: string]: string | number }[];
 
-// Renderer props
-export type RendererProps = {
-    options: Options;
-    data?: DataArray;
-};
-
 // Renderer function type
-export type RendererFunction = (props: RendererProps) => unknown;
+export type RendererFunction = () => unknown;
 
 // Registry for dynamic imports
 export type Registry = Record<
@@ -83,6 +77,9 @@ export interface Options {
 
     /** Dataset to render */
     dataSet?: DataArray;
+
+    /** Enable exporting function */
+    exportable?: boolean;
 
     /** Enable iframe sandboxing for isolation */
     sandbox?: boolean;
