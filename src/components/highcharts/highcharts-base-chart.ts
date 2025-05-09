@@ -11,9 +11,6 @@ export class HighchartsBaseChart extends HighchartsBase {
     };
 
     protected override getChartOptions(): Highcharts.Options {
-        return deepmerge(
-            super.getChartOptions(),
-            this.highchartsBAseChartOptions,
-        );
+        return deepmerge(super.getChartOptions(), this.highchartsBAseChartOptions);
     }
 }

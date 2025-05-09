@@ -9,7 +9,6 @@ import { registry } from './registry';
 export class RivmSmvdFigure extends LitElement {
     @property({ type: Object }) options: Options = {};
 
-    // eslint-disable-next-line no-unused-vars
     @state() private _renderer?: (options: RendererProps) => unknown;
     @state() private _isPreprocessingReady = false;
 
@@ -25,7 +24,6 @@ export class RivmSmvdFigure extends LitElement {
 
     async loadRenderer() {
         const typedRegistry = registry as unknown as Registry;
-
         let group: string | undefined;
         let componentType: string | undefined;
 
@@ -52,15 +50,15 @@ export class RivmSmvdFigure extends LitElement {
         let result: Options = { ...options };
 
         if (result.configSrc && !result.configFetched) {
-            const config = await this.fetchJSON<Partial<Options>>(
-                result.configSrc,
-            );
+            const config = await this.fetchJSON<Partial<Options>>(result.configSrc);
+
             result.configFetched = true;
             result = { ...result, ...config };
         }
 
         if (result.dataSrc && !result.dataFetched) {
             const data = await this.fetchJSON<DataArray>(result.dataSrc);
+
             result.dataSet = data;
             result.dataFetched = true;
         }
@@ -70,8 +68,9 @@ export class RivmSmvdFigure extends LitElement {
 
     private async fetchJSON<T = unknown>(src: string): Promise<T> {
         const response = await fetch(src);
-        if (!response.ok)
-            throw new Error(`Failed to fetch ${src}: ${response.statusText}`);
+
+        if (!response.ok) throw new Error(`Failed to fetch ${src}: ${response.statusText}`);
+
         return await response.json();
     }
 
@@ -80,6 +79,7 @@ export class RivmSmvdFigure extends LitElement {
             return html` <p>${this.error_message}</p>`;
         }
         if (!this._renderer) return html`<p>Loading chart...</p>`;
+
         return this._renderer({ options: this.options });
     }
 }

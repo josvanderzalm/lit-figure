@@ -25,8 +25,7 @@ const lang_nl = {
             afterRegionLabel: '',
             annotations: {
                 heading: 'Samenvatting van grafiekaantekeningen',
-                descriptionSinglePoint:
-                    '{annotationText}. Gerelateerd aan {annotationPoint}',
+                descriptionSinglePoint: '{annotationText}. Gerelateerd aan {annotationPoint}',
                 descriptionMultiplePoints:
                     '{annotationText}. Gerelateerd aan {annotationPoint}{#each additionalAnnotationPoints}, ook gerelateerd aan {this}{/each}',
                 descriptionNoPoints: '{annotationText}',
@@ -54,8 +53,7 @@ const lang_nl = {
             clickButtonAnnouncement: 'Bekijk {axisRangeDescription}',
         },
         navigator: {
-            handleLabel:
-                '{#eq handleIx 0}Start, procent{else}Einde, procent{/eq}',
+            handleLabel: '{#eq handleIx 0}Start, procent{else}Einde, procent{/eq}',
             groupLabel: 'Aszoom',
             changeAnnouncement: '{axisRangeDescription}',
         },
@@ -69,8 +67,7 @@ const lang_nl = {
             newPointAnnounceSingle: 'Nieuw datapunt: {pointDesc}',
             newSeriesAnnounceMultiple:
                 'Nieuwe gegevensreeksen in grafiek {chartTitle}: {seriesDesc}',
-            newPointAnnounceMultiple:
-                'Nieuwe datapunten in grafiek {chartTitle}: {pointDesc}',
+            newPointAnnounceMultiple: 'Nieuwe datapunten in grafiek {chartTitle}: {pointDesc}',
         },
         seriesTypeDescriptions: {
             boxplot:
@@ -92,12 +89,9 @@ const lang_nl = {
         },
         chartTypes: {
             emptyChart: 'Lege grafiek',
-            mapTypeDescription:
-                'Kaart van {mapTitle} met {numSeries} gegevensreeksen.',
-            unknownMap:
-                'Kaart van een niet-gespecificeerd gebied met {numSeries} gegevensreeksen.',
-            combinationChart:
-                'Combinatiegrafiek met {numSeries} gegevensreeksen.',
+            mapTypeDescription: 'Kaart van {mapTitle} met {numSeries} gegevensreeksen.',
+            unknownMap: 'Kaart van een niet-gespecificeerd gebied met {numSeries} gegevensreeksen.',
+            combinationChart: 'Combinatiegrafiek met {numSeries} gegevensreeksen.',
             defaultSingle:
                 'Grafiek met {numPoints} {#eq numPoints 1}datapunt{else}datapunten{/eq}.',
             defaultMultiple: 'Grafiek met {numSeries} gegevensreeksen.',
@@ -107,21 +101,17 @@ const lang_nl = {
             lineSingle:
                 'Lijngrafiek met {numPoints} {#eq numPoints 1}datapunt{else}datapunten{/eq}.',
             lineMultiple: 'Lijngrafiek met {numSeries} lijnen.',
-            columnSingle:
-                'Kolomgrafiek met {numPoints} {#eq numPoints 1}kolom{else}kolommen{/eq}.',
+            columnSingle: 'Kolomgrafiek met {numPoints} {#eq numPoints 1}kolom{else}kolommen{/eq}.',
             columnMultiple: 'Kolomgrafiek met {numSeries} gegevensreeksen.',
-            barSingle:
-                'Staafgrafiek met {numPoints} {#eq numPoints 1}staaf{else}staven{/eq}.',
+            barSingle: 'Staafgrafiek met {numPoints} {#eq numPoints 1}staaf{else}staven{/eq}.',
             barMultiple: 'Staafgrafiek met {numSeries} gegevensreeksen.',
             pieSingle:
                 'Cirkeldiagram met {numPoints} {#eq numPoints 1}segment{else}segmenten{/eq}.',
             pieMultiple: 'Cirkeldiagram met {numSeries} cirkeldiagrammen.',
             scatterSingle:
                 'Spreidingsdiagram met {numPoints} {#eq numPoints 1}punt{else}punten{/eq}.',
-            scatterMultiple:
-                'Spreidingsdiagram met {numSeries} gegevensreeksen.',
-            boxplotSingle:
-                'Boxplot met {numPoints} {#eq numPoints 1}box{else}boxen{/eq}.',
+            scatterMultiple: 'Spreidingsdiagram met {numSeries} gegevensreeksen.',
+            boxplotSingle: 'Boxplot met {numPoints} {#eq numPoints 1}box{else}boxen{/eq}.',
             boxplotMultiple: 'Boxplot met {numSeries} gegevensreeksen.',
             bubbleSingle:
                 'Bubbeldiagram met {numPoints} {#eq numPoints 1}bubbel{else}bubbels{/eq}.',
@@ -195,8 +185,7 @@ const lang_nl = {
             xAxisDescription: 'X-as, {name}',
             yAxisDescription: 'Y-as, {name}',
             nullPointValue: 'Geen waarde',
-            pointAnnotationsDescription:
-                '{#each annotations}Annotatie: {this}{/each}',
+            pointAnnotationsDescription: '{#each annotations}Annotatie: {this}{/each}',
         },
     },
     mainBreadcrumb: 'Hoofd',

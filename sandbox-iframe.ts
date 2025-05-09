@@ -5,6 +5,7 @@ let figureWrapperElement: (HTMLElement & { options: Options }) | null = null;
 window.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'options') {
         const options = event.data.data;
+
         options.sandbox = false;
         addFigureWrapper(options);
     }
@@ -12,17 +13,11 @@ window.addEventListener('message', (event) => {
 
 function sendHeightToParent() {
     console.log('Sending height to parent:', document.body.scrollHeight);
-    window.parent.postMessage(
-        { type: 'iframe-height', value: document.body.scrollHeight },
-        '*',
-    );
+    window.parent.postMessage({ type: 'iframe-height', value: document.body.scrollHeight }, '*');
 }
 
 function addFigureWrapper(options) {
-    figureWrapperElement = Object.assign(
-        document.createElement('rivm-smdv-figure'),
-        { options },
-    );
+    figureWrapperElement = Object.assign(document.createElement('rivm-smdv-figure'), { options });
     document.body.appendChild(figureWrapperElement);
 }
 
@@ -52,10 +47,7 @@ const resizeObserver = new ResizeObserver(() => {
 });
 
 // Ensure the DOM is fully loaded before observing the body
-if (
-    document.readyState === 'complete' ||
-    document.readyState === 'interactive'
-) {
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
     resizeObserver.observe(document.body);
 } else {
     window.addEventListener('DOMContentLoaded', () => {
@@ -65,18 +57,13 @@ if (
 
 // Send initial height on load
 window.addEventListener('load', sendInitialHeight);
+
 function sendInitialHeight() {
-    window.parent.postMessage(
-        { type: 'iframe-height', value: document.body.scrollHeight },
-        '*',
-    );
+    window.parent.postMessage({ type: 'iframe-height', value: document.body.scrollHeight }, '*');
 }
 
 // Start observing when the DOM is ready (or shortly after)
-if (
-    document.readyState === 'complete' ||
-    document.readyState === 'interactive'
-) {
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
     observeFigureWrapper();
 } else {
     window.addEventListener('DOMContentLoaded', observeFigureWrapper);

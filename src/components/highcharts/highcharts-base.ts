@@ -28,17 +28,17 @@ export class HighchartsBase extends BaseChart {
         }
 
         this.highchartsInstance = Highcharts;
+
         return Highcharts;
     }
 
-    protected async getHighchartsInstance(): Promise<
-        typeof import('highcharts')
-    > {
+    protected async getHighchartsInstance(): Promise<typeof import('highcharts')> {
         return this.loadHighcharts();
     }
 
     protected getChartOptions(): Highcharts.Options {
         const Highcharts = this.highchartsInstance;
+
         return {
             lang: lang_nl,
             chart: {
@@ -157,12 +157,7 @@ export class HighchartsBase extends BaseChart {
                         color: '#535353',
                     },
                     formatter: function () {
-                        return Highcharts.numberFormat(
-                            this.value as number,
-                            0,
-                            ',',
-                            '.',
-                        );
+                        return Highcharts.numberFormat(this.value as number, 0, ',', '.');
                     },
                 },
                 stackLabels: {

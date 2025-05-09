@@ -14,20 +14,18 @@ export class BaseChart extends LitElement {
     }
 
     // Prevent unnecessary updates by overriding shouldUpdate
-    shouldUpdate(
-        changedProperties: Map<string | number | symbol, unknown>,
-    ): boolean {
+    shouldUpdate(changedProperties: Map<string | number | symbol, unknown>): boolean {
         // Only update if options or data have changed
-        return (
-            changedProperties.has('options') || changedProperties.has('data')
-        );
+        return changedProperties.has('options') || changedProperties.has('data');
     }
 
     // Called after the first render
     async firstUpdated() {
         const container = this.shadowRoot!.getElementById('container')!;
+
         if (!container) {
             console.error('Container not found in shadow root');
+
             return;
         }
         await this.renderChart(container); // Call the subclass method to render the chart
@@ -37,6 +35,7 @@ export class BaseChart extends LitElement {
     async updated(changed: Map<string, unknown>) {
         if (changed.has('options') || changed.has('data')) {
             const container = this.shadowRoot!.getElementById('container')!;
+
             await this.renderChart(container);
         }
     }

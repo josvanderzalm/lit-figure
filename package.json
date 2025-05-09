@@ -12,7 +12,7 @@
         "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
         "lint:eslint": "eslint 'src/**/*.ts' ",
         "lint:lit-analyzer": "lit-analyzer",
-        "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.prettierignore --write"
+        "format": "eslint 'src/**/*.{ts,js}' --fix && prettier '**/*.{cjs,html,js,json,md,ts}' --ignore-path ./.prettierignore --write"
     },
     "dependencies": {
         "deepmerge": "^4.3.1",
@@ -30,6 +30,9 @@
         "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
         "@types/echarts": "^4.9.22",
         "eslint": "^9.26.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-html": "^8.1.2",
+        "eslint-plugin-prettier": "^5.4.0",
         "globals": "^16.0.0",
         "husky": "^9.1.7",
         "lint-staged": "^15.5.1",

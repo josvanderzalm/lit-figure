@@ -13,9 +13,7 @@ export class SandboxIframe extends LitElement {
     @state()
     private _iframeHeight = '10px'; // Initial height
 
-    protected firstUpdated(
-        _changedProperties: Map<string | number | symbol, unknown>,
-    ): void {
+    protected firstUpdated(_changedProperties: Map<string | number | symbol, unknown>): void {
         super.firstUpdated(_changedProperties);
         this._iframe.addEventListener('load', () => {
             this._sendOptionsToIframe();
@@ -23,9 +21,7 @@ export class SandboxIframe extends LitElement {
         window.addEventListener('message', this._handleIframeMessage);
     }
 
-    protected updated(
-        _changedProperties: Map<string | number | symbol, unknown>,
-    ): void {
+    protected updated(_changedProperties: Map<string | number | symbol, unknown>): void {
         super.updated(_changedProperties);
         if (_changedProperties.has('options') && this._iframe?.contentWindow) {
             this._sendOptionsToIframe();
@@ -34,16 +30,14 @@ export class SandboxIframe extends LitElement {
 
     private _sendOptionsToIframe() {
         if (this._iframe && this._iframe.contentWindow) {
-            this._iframe.contentWindow.postMessage(
-                { type: 'options', data: this.options },
-                '*',
-            );
+            this._iframe.contentWindow.postMessage({ type: 'options', data: this.options }, '*');
         }
     }
 
     private _handleIframeMessage = (event: MessageEvent) => {
         if (event.data && event.data.type === 'iframe-height') {
             const height = event.data.value;
+
             if (typeof height === 'number' && height > 0) {
                 this._iframeHeight = `${height}px`;
             }

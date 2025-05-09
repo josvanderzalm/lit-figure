@@ -4,6 +4,7 @@ function toJson<T>(text: string | T): T {
         return JSON.parse(text) as T;
     } catch (error) {
         console.error('Fout bij het parsen van JSON:', error);
+
         return {} as T;
     }
 }

@@ -22,10 +22,7 @@ export type RendererProps = {
 };
 
 // Registry for dynamic imports
-export type Registry = Record<
-    string,
-    Record<string, () => Promise<RendererFunction>>
->;
+export type Registry = Record<string, Record<string, () => Promise<RendererFunction>>>;
 
 // Axis configuration
 export interface AxisZone {

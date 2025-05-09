@@ -26,10 +26,7 @@ export class HighchartsLine extends HighchartsBaseChart {
             return {
                 chart: {
                     type: options.type || 'line',
-                    width:
-                        options.width === '100%'
-                            ? null
-                            : parseInt(options.width as string, 10),
+                    width: options.width === '100%' ? null : parseInt(options.width as string, 10),
                     height: parseInt(options.height as string, 10) || 400,
                 },
                 title: {
@@ -68,27 +65,20 @@ export class HighchartsLine extends HighchartsBaseChart {
                         name: options.yKey || 'Data',
                         data: data.map((item: DataItem) => {
                             const x =
-                                (options.xAxis as Highcharts.XAxisOptions)
-                                    ?.type === 'datetime'
-                                    ? this.dateStringToTimestamp(
-                                          item[options.xKey] as string,
-                                      )
+                                (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
+                                    ? this.dateStringToTimestamp(item[options.xKey] as string)
                                     : item[options.xKey];
                             const y =
                                 options['y-axis']?.type === 'datetime'
-                                    ? this.dateStringToTimestamp(
-                                          item[options.yKey] as string,
-                                      )
+                                    ? this.dateStringToTimestamp(item[options.yKey] as string)
                                     : item[options.yKey];
+
                             return [x, y];
                         }),
                     },
                 ],
                 exporting: {
-                    enabled:
-                        options.exportable !== undefined
-                            ? options.exportable
-                            : true,
+                    enabled: options.exportable !== undefined ? options.exportable : true,
                 },
                 credits: {
                     enabled: true,
@@ -98,25 +88,22 @@ export class HighchartsLine extends HighchartsBaseChart {
             };
         } catch (error) {
             console.error('Error fetching or processing data:', error);
+
             return null;
         }
     }
     private dateStringToTimestamp = (dateString: string): number | string => {
         const parsedDateString = Date.parse(dateString);
+
         return isNaN(parsedDateString) ? dateString : parsedDateString;
     };
 
     // Override to combine base options and additional chart options
     protected override getChartOptions(): Highcharts.Options {
-        return deepmerge(
-            super.getChartOptions(),
-            this.generateHighchartsOptions(this.options),
-        );
+        return deepmerge(super.getChartOptions(), this.generateHighchartsOptions(this.options));
     }
 
-    protected override async renderChart(
-        container: HTMLElement,
-    ): Promise<void> {
+    protected override async renderChart(container: HTMLElement): Promise<void> {
         // load Highcharts dynamically
         const Highcharts = await this.getHighchartsInstance();
 
