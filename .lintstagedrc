@@ -1,4 +1,4 @@
 {
-    "src/**/*.{ts,js}": ["npm run lint:eslint", "npm run format"],
-    "**/*.{json,md,html}": ["npm run format"]
+    "src/**/*.{ts,js}": ["npm run lint"],
+    "**/*.{json,md,html}": ["npm run format:prettier"]
 }
