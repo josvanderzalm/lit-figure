@@ -1,3 +1,4 @@
+import { loadROSansFonts } from './font-loader';
 import { toJson } from './to-json';
 
-export { toJson };
+export { loadROSansFonts, toJson };

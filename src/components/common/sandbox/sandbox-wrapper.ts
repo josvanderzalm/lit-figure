@@ -48,7 +48,8 @@ export class SandboxIframe extends LitElement {
         return html`
             <iframe
                 src="./sandbox-iframe.html"
-                style="width: 100%; outline: 6px dashed rgba(0,0,0,0.2); border: none; height: ${this
+                scrolling="no"
+                style="width: 100%; overflow: hidden; outline: 6px dashed rgba(0,0,0,0.2); border: none; height: ${this
                     ._iframeHeight};"
             ></iframe>
         `;

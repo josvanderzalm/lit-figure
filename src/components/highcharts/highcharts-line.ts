@@ -1,97 +1,15 @@
-// Highcharts Line
+// highcharts-line.ts
+
 import deepmerge from 'deepmerge';
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import { HighchartsBaseChart } from '@/components/highcharts/highcharts-base-chart';
-import type { Options } from '@/types';
+import type { DataItem, Zone } from '@/types';
 
 @customElement('highcharts-line')
 export class HighchartsLine extends HighchartsBaseChart {
-    generateHighchartsOptions(options: Options): Highcharts.Options | null {
-        try {
-            const data = options.dataSet;
-
-            interface Zone {
-                from: string;
-                to: string;
-                label?: string;
-            }
-
-            interface DataItem {
-                [key: string]: unknown;
-            }
-
-            return {
-                chart: {
-                    type: options.type || 'line',
-                    width: options.width === '100%' ? null : parseInt(options.width as string, 10),
-                    height: parseInt(options.height as string, 10) || 400,
-                },
-                title: {
-                    text: options.title || '',
-                },
-                subtitle: {
-                    text: options.subtitle || '',
-                },
-                xAxis: {
-                    type: (options.xAxis as Highcharts.XAxisOptions)?.type,
-                    title: {
-                        text: options.xAxis?.title || '',
-                    },
-                    plotBands:
-                        options.xAxis?.zones?.map((zone: Zone) => ({
-                            from: this.dateStringToTimestamp(zone.from),
-                            to: this.dateStringToTimestamp(zone.to),
-                            color: 'rgba(200, 200, 200, 0.2)',
-                            label: {
-                                text: zone.label,
-                                style: {
-                                    color: '#666',
-                                    fontSize: '10px',
-                                },
-                            },
-                        })) || [],
-                },
-                yAxis: {
-                    title: {
-                        text: options['y-axis']?.title || '',
-                    },
-                },
-                series: [
-                    {
-                        type: 'line',
-                        name: options.yKey || 'Data',
-                        data: data.map((item: DataItem) => {
-                            const x =
-                                (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
-                                    ? this.dateStringToTimestamp(item[options.xKey] as string)
-                                    : item[options.xKey];
-                            const y =
-                                options['y-axis']?.type === 'datetime'
-                                    ? this.dateStringToTimestamp(item[options.yKey] as string)
-                                    : item[options.yKey];
-
-                            return [x, y];
-                        }),
-                    },
-                ],
-                exporting: {
-                    enabled: options.exportable !== undefined ? options.exportable : true,
-                },
-                credits: {
-                    enabled: true,
-                    text: options.source || '',
-                    href: options['source-url'] || '',
-                },
-            };
-        } catch (error) {
-            console.error('Error fetching or processing data:', error);
-
-            return null;
-        }
-    }
     private dateStringToTimestamp = (dateString: string): number | string => {
         const parsedDateString = Date.parse(dateString);
 
@@ -100,16 +18,79 @@ export class HighchartsLine extends HighchartsBaseChart {
 
     // Override to combine base options and additional chart options
     protected override getChartOptions(): Highcharts.Options {
-        return deepmerge(super.getChartOptions(), this.generateHighchartsOptions(this.options));
+        const options = this.options;
+        const data = options.dataSet;
+        const chartOptions: Highcharts.Options = {
+            chart: {
+                type: options.type || 'line',
+                width: options.width === '100%' ? null : parseInt(options.width as string, 10),
+                height: parseInt(options.height as string, 10) || 400,
+            },
+            title: {
+                text: options.title || '',
+            },
+            subtitle: {
+                text: options.subtitle || '',
+            },
+            xAxis: {
+                type: (options.xAxis as Highcharts.XAxisOptions)?.type,
+                title: {
+                    text: options.xAxis?.title || '',
+                },
+                plotBands:
+                    options.xAxis?.zones?.map((zone: Zone) => ({
+                        from: this.dateStringToTimestamp(zone.from),
+                        to: this.dateStringToTimestamp(zone.to),
+                        color: 'rgba(200, 200, 200, 0.2)',
+                        label: {
+                            text: zone.label,
+                            style: {
+                                color: '#666',
+                                fontSize: '10px',
+                            },
+                        },
+                    })) || [],
+            },
+            yAxis: {
+                title: {
+                    text: options['y-axis']?.title || '',
+                },
+            },
+            series: [
+                {
+                    type: 'line',
+                    name: options.yKey || 'Data',
+                    data: data.map((item: DataItem) => {
+                        const x =
+                            (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
+                                ? this.dateStringToTimestamp(item[options.xKey] as string)
+                                : item[options.xKey];
+                        const y =
+                            options['y-axis']?.type === 'datetime'
+                                ? this.dateStringToTimestamp(item[options.yKey] as string)
+                                : item[options.yKey];
+
+                        return [x, y];
+                    }),
+                },
+            ],
+            exporting: {
+                enabled: options.exportable !== undefined ? options.exportable : true,
+            },
+            credits: {
+                enabled: true,
+                text: options.source || '',
+                href: options['source-url'] || '',
+            },
+        };
+
+        return deepmerge(super.getChartOptions(), chartOptions);
     }
 
     protected override async renderChart(container: HTMLElement): Promise<void> {
-        // load Highcharts dynamically
         const Highcharts = await this.getHighchartsInstance();
 
-        // Dynamically load and initialize extra required modules
         await Promise.all([import('highcharts/modules/drilldown')]);
-
         Highcharts.chart(container, this.getChartOptions());
     }
 

@@ -2,6 +2,7 @@ import type * as Highcharts from 'highcharts';
 
 import { BaseChart } from '@/components/common/base/base-figure';
 import lang_nl from '@/components/highcharts/lang/lang-nl';
+import type { ActionItem } from '@/types';
 
 export class HighchartsBase extends BaseChart {
     protected highchartsInstance: typeof import('highcharts') | null = null;
@@ -34,6 +35,42 @@ export class HighchartsBase extends BaseChart {
 
     protected async getHighchartsInstance(): Promise<typeof import('highcharts')> {
         return this.loadHighcharts();
+    }
+
+    getButtons(): ActionItem[] {
+        const baseButtons = super.getButtons(); // Get the base buttons
+
+        // Add Highcharts-specific actions to the list
+        baseButtons.push(
+            {
+                type: 'button',
+                label: 'Zoom In',
+                action: () => console.log('Zoom In clicked'),
+            },
+            {
+                type: 'button',
+                label: 'Zoom Out',
+                action: () => console.log('Zoom Out clicked'),
+            },
+            {
+                type: 'group',
+                label: 'Export',
+                children: [
+                    {
+                        type: 'button',
+                        label: 'Export to SVG',
+                        action: () => console.log('Export to SVG clicked'),
+                    },
+                    {
+                        type: 'button',
+                        label: 'Export to CSV',
+                        action: () => console.log('Export to CSV clicked'),
+                    },
+                ],
+            },
+        );
+
+        return baseButtons;
     }
 
     protected getChartOptions(): Highcharts.Options {
