@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js';
 
 import '../action-menu/action-menu';
 
-import type { ActionItem, DataArray, Options } from '@/types';
+import type { ActionItem, DataArray, GroupActionItem, Options } from '@/types';
 import { loadROSansFonts } from '@/utils//index';
 
 export class BaseChart extends LitElement {
@@ -33,8 +33,6 @@ export class BaseChart extends LitElement {
         // Call the external function to load the fonts
         try {
             await loadROSansFonts();
-            // Optional: Add a class or property to indicate fonts are ready if needed for styling
-            // this.classList.add('fonts-ready');
         } catch (error) {
             // Handle potential errors from font loading
             console.error('Component detected font loading error:', error);
@@ -63,31 +61,40 @@ export class BaseChart extends LitElement {
     getButtons(): ActionItem[] {
         return [
             {
+                id: 'show-table',
                 type: 'button',
-                label: 'Base Action',
-                action: () => console.log('Base Action clicked'),
-            },
-            {
-                type: 'group',
-                label: 'More Actions',
-                children: [
-                    {
-                        type: 'button',
-                        label: 'Base Group Action 1',
-                        action: () => console.log('Base Group Action 1 clicked'),
-                    },
-                    {
-                        type: 'button',
-                        label: 'Base Group Action 2',
-                        action: () => console.log('Base Group Action 2 clicked'),
-                    },
-                ],
+                label: 'Show table',
+                action: () => console.log('Show table action clicked'),
             },
         ];
     }
 
+    // Delete betton fram the ActionItem array
+    deleteButtons(items: ActionItem[], filterIds: string[]): ActionItem[] {
+        for (let i = items.length - 1; i >= 0; i--) {
+            const item = items[i];
+
+            if (item.type === 'group') {
+                const group = item as GroupActionItem;
+
+                this.deleteButtons(group.children, filterIds);
+
+                if (group.children.length === 0) {
+                    delete items[i];
+                    items.splice(i, 1); // remove empty group entirely
+                }
+            } else if (filterIds.includes(item.id)) {
+                delete items[i]; // make value undefined
+                items.splice(i, 1); // remove it from the array
+            }
+        }
+
+        return items;
+    }
+
+    // render the chart container and action menu
     render() {
-        return html` <div id="container" style="width:100%; height:100%"></div>
+        return html`<div id="container" style="width:100%; height:100%"></div>
             <action-menu .buttons=${this.getButtons()}></action-menu>`;
     }
 }

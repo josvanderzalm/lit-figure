@@ -41,34 +41,43 @@ export class HighchartsBase extends BaseChart {
         const baseButtons = super.getButtons(); // Get the base buttons
 
         // Add Highcharts-specific actions to the list
-        baseButtons.push(
-            {
-                type: 'button',
-                label: 'Zoom In',
-                action: () => console.log('Zoom In clicked'),
-            },
-            {
-                type: 'button',
-                label: 'Zoom Out',
-                action: () => console.log('Zoom Out clicked'),
-            },
-            {
-                type: 'group',
-                label: 'Export',
-                children: [
-                    {
-                        type: 'button',
-                        label: 'Export to SVG',
-                        action: () => console.log('Export to SVG clicked'),
-                    },
-                    {
-                        type: 'button',
-                        label: 'Export to CSV',
-                        action: () => console.log('Export to CSV clicked'),
-                    },
-                ],
-            },
-        );
+        baseButtons.push({
+            id: 'export',
+            type: 'group',
+            label: 'Export',
+            children: [
+                {
+                    id: 'download-png',
+                    type: 'button',
+                    label: 'Download the chart as PNG',
+                    action: () => console.log('Export to PNG clicked'),
+                },
+                {
+                    id: 'download-svg',
+                    type: 'button',
+                    label: 'Download the chart as SVG',
+                    action: () => console.log('Export to SVG clicked'),
+                },
+                {
+                    id: 'download-pdf',
+                    type: 'button',
+                    label: 'Download the chart as PDF',
+                    action: () => console.log('Export to SVG clicked'),
+                },
+                {
+                    id: 'download-csv',
+                    type: 'button',
+                    label: 'Download the data as CSV',
+                    action: () => console.log('Export to CSV clicked'),
+                },
+                {
+                    id: 'download-xls',
+                    type: 'button',
+                    label: 'Download the data as XLS',
+                    action: () => console.log('Export to XLS clicked'),
+                },
+            ],
+        });
 
         return baseButtons;
     }

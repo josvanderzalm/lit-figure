@@ -6,6 +6,7 @@ export type { EchartsOptions, HighchartsOptions };
 
 // Define the ActionItem type
 export interface ActionItemBase {
+    id: string;
     label: string;
     icon?: string;
 }
@@ -93,6 +94,12 @@ export interface Options {
 
     /** The  language of the visualisation, default to doc language */
     lang?: 'en' | 'nl';
+
+    /** administrative area division code */
+    mapDivisionCode?: string;
+
+    /** the year of the administrative area division code */
+    mapDivisionYear?: string;
 
     /** Key used for pivoting data (e.g., field name) */
     pivotField?: string;

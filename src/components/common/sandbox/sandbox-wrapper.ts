@@ -4,7 +4,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { Options } from '@/types';
 
 @customElement('sandbox-iframe')
-export class SandboxIframe extends LitElement {
+export class SandboxWrapper extends LitElement {
     @property({ type: Object }) options: Options = {};
 
     @query('iframe')

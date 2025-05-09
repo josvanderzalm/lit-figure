@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 import type { DataArray, Options, Registry, RendererProps } from '@/types';
@@ -7,6 +7,12 @@ import { registry } from './registry';
 
 @customElement('rivm-smdv-figure')
 export class RivmSmvdFigure extends LitElement {
+    static styles = css`
+        :host {
+            display: block;
+            border: 0.5px solid rgba(0, 0, 0, 0.2);
+        }
+    `;
     @property({ type: Object }) options: Options = {};
 
     @state() private _renderer?: (options: RendererProps) => unknown;

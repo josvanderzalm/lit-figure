@@ -10,6 +10,8 @@ export class ActionMenu extends LitElement {
             display: flex;
             gap: 0.5rem;
             justify-content: flex-end;
+            position: relative;
+            z-index: 10;
         }
 
         .menu-group {
@@ -20,7 +22,7 @@ export class ActionMenu extends LitElement {
             display: none;
             position: absolute;
             bottom: 100%;
-            right: 0; /* Align submenu to the right of the parent button */
+            right: 0;
             flex-direction: column;
             background: white;
             border: 1px solid #ccc;
@@ -35,7 +37,7 @@ export class ActionMenu extends LitElement {
         .button {
             display: flex;
             align-items: center;
-            gap: 0.5rem; /* Space between icon and label */
+            gap: 0.5rem;
             padding: 0.5rem;
             background: #fff;
             border: 1px solid #ccc;
@@ -43,11 +45,10 @@ export class ActionMenu extends LitElement {
         }
 
         .button img {
-            width: 16px; /* Adjust icon size */
+            width: 16px;
             height: 16px;
         }
 
-        /* Chevron styling */
         .chevron {
             width: 0;
             height: 0;
@@ -59,7 +60,7 @@ export class ActionMenu extends LitElement {
         }
 
         .menu-group.open .chevron {
-            transform: rotate(180deg); /* Rotate the chevron when open */
+            transform: rotate(180deg);
         }
     `;
 
@@ -103,9 +104,60 @@ export class ActionMenu extends LitElement {
         this.closeTimer = window.setTimeout(() => this.closeSubMenu(), 1500);
     }
 
+    private cancelCloseTimer() {
+        if (this.closeTimer) {
+            clearTimeout(this.closeTimer);
+            this.closeTimer = null;
+        }
+    }
+
+    private handleKeyDown(e: KeyboardEvent) {
+        const buttons = Array.from(this.shadowRoot!.querySelectorAll<HTMLButtonElement>('.button'));
+        const currentIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
+
+        if (e.key === 'ArrowRight') {
+            console.log('Right arrow pressed');
+
+            const next = (currentIndex + 1) % buttons.length;
+
+            buttons[next].focus();
+            e.preventDefault();
+        } else if (e.key === 'ArrowLeft') {
+            console.log('Left arrow pressed');
+
+            const prev = (currentIndex - 1 + buttons.length) % buttons.length;
+
+            buttons[prev].focus();
+            e.preventDefault();
+        } else if (e.key === 'ArrowDown') {
+            console.log('Down arrow pressed');
+
+            const current = document.activeElement as HTMLButtonElement;
+            const submenu = current?.parentElement?.querySelector('.submenu');
+            const submenuButtons = submenu?.querySelectorAll<HTMLButtonElement>('button');
+
+            if (submenuButtons && submenuButtons.length > 0) {
+                submenuButtons[0].focus();
+                e.preventDefault();
+            }
+        } else if (e.key === 'ArrowUp') {
+            console.log('Up arrow pressed');
+
+            const parent = (document.activeElement as HTMLElement).closest('.menu-group');
+            const groupButton = parent?.querySelector<HTMLButtonElement>('button.button');
+
+            if (groupButton) {
+                groupButton.focus();
+                e.preventDefault();
+            }
+        } else if (e.key === 'Escape') {
+            this.closeSubMenu();
+        }
+    }
+
     render() {
         return html`
-            <div class="menu">
+            <div class="menu" @keydown=${this.handleKeyDown}>
                 ${this.buttons.map((item, index) => {
                     if (item.type === 'button') {
                         const buttonItem = item as ButtonActionItem;
@@ -134,6 +186,7 @@ export class ActionMenu extends LitElement {
                         return html`
                             <div
                                 class="menu-group ${isOpen ? 'open' : ''}"
+                                @mouseenter=${this.cancelCloseTimer}
                                 @mouseleave=${this.handleMouseOut}
                             >
                                 <button
@@ -150,7 +203,11 @@ export class ActionMenu extends LitElement {
                                     ${groupItem.label}
                                     <span class="chevron"></span>
                                 </button>
-                                <div class="submenu">
+                                <div
+                                    class="submenu"
+                                    @mouseenter=${this.cancelCloseTimer}
+                                    @mouseleave=${this.handleMouseOut}
+                                >
                                     ${groupItem.children.map((child, subIndex) => {
                                         if (child.type === 'button') {
                                             const buttonChild = child as ButtonActionItem;
@@ -159,10 +216,7 @@ export class ActionMenu extends LitElement {
                                                 <button
                                                     @click=${() =>
                                                         this.handleClick(buttonChild.action)}
-                                                    tabindex="${subIndex ===
-                                                    groupItem.children.length - 1
-                                                        ? 1
-                                                        : 2}"
+                                                    tabindex="${subIndex}"
                                                     class="button"
                                                 >
                                                     ${buttonChild.icon

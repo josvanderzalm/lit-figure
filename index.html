@@ -4,6 +4,12 @@
         <meta charset="UTF-8" />
         <title>SMDV componet</title>
         <script type="module" src="/src/main.ts"></script>
+        <style>
+            rivm-smdv-figure {
+                margin: 1em 0;
+                display: block;
+            }
+        </style>
     </head>
 
     <body>
@@ -38,45 +44,45 @@
             })(document.currentScript);
         </script>
 
-        <!--<script>
-        (function (currentScript) {
-            const options = {
-                dataSrc: './data/kinkhoestmeldingen.json',
-                xKey: 'Datum',
-                yKey: 'Meldingen',
-                type: 'line',
-                library: 'highcharts',
-                sandbox: false,
-                title: 'Kinkhoestmeldingen per maand, 2018-2025',
-                source: 'Bron: RIVM, Osiris',
-                xAxis: {
-                    zones: [
-                        {
-                            from: '2020-03-01',
-                            to: '2022-03-01',
-                            label: 'periode met corona maatregelen',
-                        },
-                        {
-                            from: '2024-11-01',
-                            to: '2025-01-01',
-                            label: 'Voorlopige cijfers',
-                        },
-                    ],
-                },
-                yAxis: {
-                    title: 'Aantal',
-                },
-            };
-            currentScript.parentNode.insertBefore(
-                Object.assign(document.createElement('rivm-smdv-figure'), {
-                    options,
-                }),
-                currentScript.nextSibling,
-            );
-        })(document.currentScript);
-    </script>
+        <script>
+            (function (currentScript) {
+                const options = {
+                    dataSrc: './data/kinkhoestmeldingen.json',
+                    xKey: 'Datum',
+                    yKey: 'Meldingen',
+                    type: 'composite',
+                    library: 'highcharts',
+                    sandbox: false,
+                    title: 'Kinkhoestmeldingen per maand, 2018-2025 (Composite)',
+                    source: 'Bron: RIVM, Osiris',
+                    xAxis: {
+                        zones: [
+                            {
+                                from: '2020-03-01',
+                                to: '2022-03-01',
+                                label: 'periode met corona maatregelen',
+                            },
+                            {
+                                from: '2024-11-01',
+                                to: '2025-01-01',
+                                label: 'Voorlopige cijfers',
+                            },
+                        ],
+                    },
+                    yAxis: {
+                        title: 'Aantal',
+                    },
+                };
+                currentScript.parentNode.insertBefore(
+                    Object.assign(document.createElement('rivm-smdv-figure'), {
+                        options,
+                    }),
+                    currentScript.nextSibling,
+                );
+            })(document.currentScript);
+        </script>
 
-    <script>
+        <!--<script>
         (function (currentScript) {
             const options = {
                 dataSrc: './data/kinkhoestmeldingen.json',
