@@ -1,1 +1,23 @@
-[]
+[
+    { "year": 2004, "cases": 9737 },
+    { "year": 2005, "cases": 5933 },
+    { "year": 2006, "cases": 4404 },
+    { "year": 2007, "cases": 7767 },
+    { "year": 2008, "cases": 8206 },
+    { "year": 2009, "cases": 6300 },
+    { "year": 2010, "cases": 3681 },
+    { "year": 2011, "cases": 7176 },
+    { "year": 2012, "cases": 13827 },
+    { "year": 2013, "cases": 3418 },
+    { "year": 2014, "cases": 9237 },
+    { "year": 2015, "cases": 6553 },
+    { "year": 2016, "cases": 5562 },
+    { "year": 2017, "cases": 4927 },
+    { "year": 2018, "cases": 4875 },
+    { "year": 2019, "cases": 6385 },
+    { "year": 2020, "cases": 959 },
+    { "year": 2021, "cases": 79 },
+    { "year": 2022, "cases": 147 },
+    { "year": 2023, "cases": 2957 },
+    { "year": 2024, "cases": 17951 }
+]

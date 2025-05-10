@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "leeftijdscategorie": "0 tot 6 maanden",
+        "aantal_ziekenhuisopnamen": 249,
+        "percentage_van_het_aantal_meldingen": 52.87
+    },
+    {
+        "leeftijdscategorie": "6 tot 12 maanden",
+        "aantal_ziekenhuisopnamen": 76,
+        "percentage_van_het_aantal_meldingen": 20.82
+    },
+    {
+        "leeftijdscategorie": "1 tot 5 jaar",
+        "aantal_ziekenhuisopnamen": 66,
+        "percentage_van_het_aantal_meldingen": 7.37
+    },
+    {
+        "leeftijdscategorie": "5 tot 10 jaar",
+        "aantal_ziekenhuisopnamen": 7,
+        "percentage_van_het_aantal_meldingen": 0.75
+    },
+    {
+        "leeftijdscategorie": "10 tot 20 jaar",
+        "aantal_ziekenhuisopnamen": 15,
+        "percentage_van_het_aantal_meldingen": 0.38
+    },
+    {
+        "leeftijdscategorie": "20 jaar en ouder",
+        "aantal_ziekenhuisopnamen": 148,
+        "percentage_van_het_aantal_meldingen": 1.3
+    }
+]

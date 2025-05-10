@@ -1,1 +1,101 @@
-[]
+[
+    {
+        "month": "Nov '22",
+        "avg_amount_per_case": 1720,
+        "number_of_cases": 38038,
+        "total_refundable_amount": 65442,
+        "avg_amount_per_case_trend": 1752.29,
+        "number_of_cases_trend": 41784.48,
+        "total_refundable_amount_trend": 72885
+    },
+    {
+        "month": "Dec '22",
+        "avg_amount_per_case": 1753,
+        "number_of_cases": 43607,
+        "total_refundable_amount": 76444,
+        "avg_amount_per_case_trend": 1724.98,
+        "number_of_cases_trend": 41482.96,
+        "total_refundable_amount_trend": 71351
+    },
+    {
+        "month": "Jan '23",
+        "avg_amount_per_case": 1652,
+        "number_of_cases": 38881,
+        "total_refundable_amount": 64224,
+        "avg_amount_per_case_trend": 1697.67,
+        "number_of_cases_trend": 41181.44,
+        "total_refundable_amount_trend": 69817
+    },
+    {
+        "month": "Feb '23",
+        "avg_amount_per_case": 1663,
+        "number_of_cases": 38944,
+        "total_refundable_amount": 64746,
+        "avg_amount_per_case_trend": 1670.36,
+        "number_of_cases_trend": 40879.92,
+        "total_refundable_amount_trend": 68283
+    },
+    {
+        "month": "Mar '23",
+        "avg_amount_per_case": 1659,
+        "number_of_cases": 43873,
+        "total_refundable_amount": 72807,
+        "avg_amount_per_case_trend": 1643.06,
+        "number_of_cases_trend": 40578.4,
+        "total_refundable_amount_trend": 66749
+    },
+    {
+        "month": "Apr '23",
+        "avg_amount_per_case": 1665,
+        "number_of_cases": 39051,
+        "total_refundable_amount": 65008,
+        "avg_amount_per_case_trend": 1615.75,
+        "number_of_cases_trend": 40276.88,
+        "total_refundable_amount_trend": 65215
+    },
+    {
+        "month": "May '23",
+        "avg_amount_per_case": 1646,
+        "number_of_cases": 45018,
+        "total_refundable_amount": 74097,
+        "avg_amount_per_case_trend": 1588.44,
+        "number_of_cases_trend": 39975.36,
+        "total_refundable_amount_trend": 63681
+    },
+    {
+        "month": "Jun '23",
+        "avg_amount_per_case": 1567,
+        "number_of_cases": 44689,
+        "total_refundable_amount": 70008,
+        "avg_amount_per_case_trend": 1561.13,
+        "number_of_cases_trend": 39673.84,
+        "total_refundable_amount_trend": 62147
+    },
+    {
+        "month": "Jul '23",
+        "avg_amount_per_case": 1493,
+        "number_of_cases": 42446,
+        "total_refundable_amount": 63386,
+        "avg_amount_per_case_trend": 1533.82,
+        "number_of_cases_trend": 39372.32,
+        "total_refundable_amount_trend": 60613
+    },
+    {
+        "month": "Aug '23",
+        "avg_amount_per_case": 1485,
+        "number_of_cases": 34374,
+        "total_refundable_amount": 51034,
+        "avg_amount_per_case_trend": 1506.51,
+        "number_of_cases_trend": 39070.8,
+        "total_refundable_amount_trend": 59079
+    },
+    {
+        "month": "Sep '23",
+        "avg_amount_per_case": 1470,
+        "number_of_cases": 34125,
+        "total_refundable_amount": 50161,
+        "avg_amount_per_case_trend": 1479.2,
+        "number_of_cases_trend": 38769.28,
+        "total_refundable_amount_trend": 57545
+    }
+]
