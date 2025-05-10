@@ -20,6 +20,8 @@ export class BaseChart extends LitElement {
     constructor() {
         super();
         // Derive base_url from the component's own file location
+        // Build: http://localhost:4173/assets/assets
+        // Dev: http://localhost:5173/src/components/common/base/assets
         this.base_url = new URL('./assets', import.meta.url).href; // Relative to the module location
     }
 
