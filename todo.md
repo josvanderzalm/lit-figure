@@ -8,3 +8,4 @@
 - Map
 - simple statistics
 - paletteOffset
+- base_url see base-figere.ts

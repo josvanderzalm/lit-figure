@@ -15,6 +15,13 @@ export class BaseChart extends LitElement {
 
     @property({ type: Object }) options: Options = {}; // Chart options (for customization)
     @property({ type: Array }) data: DataArray = []; // Data for the chart
+    @property({ type: String }) base_url: string;
+
+    constructor() {
+        super();
+        // Derive base_url from the component's own file location
+        this.base_url = new URL('./assets', import.meta.url).href; // Relative to the module location
+    }
 
     // Allow subclasses to override with async support
     protected async renderChart(container: HTMLElement): Promise<void> {
@@ -94,6 +101,8 @@ export class BaseChart extends LitElement {
 
     // render the chart container and action menu
     render() {
+        console.log('base_url', this.base_url);
+
         return html`<div id="container" style="width:100%; height:100%"></div>
             <action-menu .buttons=${this.getButtons()}></action-menu>`;
     }
