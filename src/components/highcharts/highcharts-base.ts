@@ -37,6 +37,7 @@ export class HighchartsBase extends BaseChart {
         return this.loadHighcharts();
     }
 
+    // Add generic action buttons
     getButtons(): ActionItem[] {
         const baseButtons = super.getButtons(); // Get the base buttons
 
@@ -288,7 +289,7 @@ export class HighchartsBase extends BaseChart {
                         },
                     },
                     marker: {
-                        lineColor: null, // inherit from series
+                        lineColor: null,
                         states: {
                             hover: {
                                 fillColor: '#ffffff',
@@ -356,7 +357,7 @@ export class HighchartsBase extends BaseChart {
                 },
                 heatmap: {
                     marker: {
-                        lineColor: null, // inherit from series
+                        lineColor: null,
                         states: {
                             hover: {
                                 enabled: false,

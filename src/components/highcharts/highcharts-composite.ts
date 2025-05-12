@@ -87,7 +87,7 @@ export class HighchartsLine extends HighchartsBaseChart {
 
     // Remove buttons that are not compatible with this chart type
     override getButtons(): ActionItem[] {
-        return this.deleteButtons(super.getButtons(), [
+        return this.unsetButtons(super.getButtons(), [
             'download-png',
             'download-svg',
             'download-pdf',

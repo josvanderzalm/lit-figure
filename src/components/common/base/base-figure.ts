@@ -78,15 +78,20 @@ export class BaseChart extends LitElement {
         ];
     }
 
-    // Delete betton fram the ActionItem array
-    deleteButtons(items: ActionItem[], filterIds: string[]): ActionItem[] {
+    // Get the data needed for rendering the data table
+    getTableData(): DataArray {
+        return this.data;
+    }
+
+    // Remove buttons from the ActionItem array
+    unsetButtons(items: ActionItem[], filterIds: string[]): ActionItem[] {
         for (let i = items.length - 1; i >= 0; i--) {
             const item = items[i];
 
             if (item.type === 'group') {
                 const group = item as GroupActionItem;
 
-                this.deleteButtons(group.children, filterIds);
+                this.unsetButtons(group.children, filterIds);
 
                 if (group.children.length === 0) {
                     delete items[i];
