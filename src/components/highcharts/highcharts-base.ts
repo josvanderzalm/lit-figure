@@ -120,11 +120,6 @@ export class HighchartsBase extends BaseChart {
             exporting: {
                 fallbackToExportServer: false,
                 enabled: false,
-                // buttons: {
-                //     contextButton: {
-                //         menuItems: [], // No menu items
-                //     },
-                // },
             },
             credits: {
                 enabled: true,
