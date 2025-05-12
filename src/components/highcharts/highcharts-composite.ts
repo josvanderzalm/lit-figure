@@ -72,14 +72,6 @@ export class HighchartsLine extends HighchartsBaseChart {
                     }),
                 },
             ],
-            exporting: {
-                enabled: options.exportable !== undefined ? options.exportable : true,
-            },
-            credits: {
-                enabled: true,
-                text: options.source || '',
-                href: options['source-url'] || '',
-            },
         };
 
         return deepmerge(super.getChartOptions(), chartOptions);

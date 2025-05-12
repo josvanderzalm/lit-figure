@@ -1,4 +1,5 @@
 import type * as Highcharts from 'highcharts';
+import slugify from 'slugify';
 
 import { BaseChart } from '@/components/common/base/base-figure';
 import lang_nl from '@/components/highcharts/lang/lang-nl';
@@ -7,39 +8,28 @@ import type { ActionItem } from '@/types';
 export class HighchartsBase extends BaseChart {
     protected highchartsInstance: typeof import('highcharts') | null = null;
 
-    private async loadHighcharts(): Promise<typeof import('highcharts')> {
+    // store the higharts chart instance
+    protected highchartsChart: Highcharts.Chart | null = null;
+
+    protected async getHighchartsInstance(): Promise<typeof import('highcharts')> {
         if (this.highchartsInstance) return this.highchartsInstance;
 
         const Highcharts = (await import('highcharts')).default;
-
-        // Set language options
-        Highcharts.setOptions({ lang: lang_nl });
-
-        // Dynamically load and initialize required modules
-        await Promise.all([import('highcharts/modules/accessibility')]);
-
-        // Load the exporting modules if exporting is enabled
-        if (this.options.exportable) {
-            await Promise.all([
-                import('highcharts/modules/export-data'),
-                import('highcharts/modules/exporting'),
-            ]);
-            // load offline exporting after other exporting modules to prevent issues
-            await import('highcharts/modules/offline-exporting');
-        }
 
         this.highchartsInstance = Highcharts;
 
         return Highcharts;
     }
 
-    protected async getHighchartsInstance(): Promise<typeof import('highcharts')> {
-        return this.loadHighcharts();
+    // Called after the first render
+    async firstUpdated() {
+        super.firstUpdated();
     }
 
     // Add generic action buttons
     getButtons(): ActionItem[] {
         const baseButtons = super.getButtons(); // Get the base buttons
+        const fileName = slugify(this.options.title);
 
         // Add Highcharts-specific actions to the list
         baseButtons.push({
@@ -51,19 +41,31 @@ export class HighchartsBase extends BaseChart {
                     id: 'download-png',
                     type: 'button',
                     label: 'Download the chart as PNG',
-                    action: () => console.log('Export to PNG clicked'),
+                    action: () =>
+                        this.highchartsChart.exportChartLocal({
+                            type: 'image/png',
+                            filename: fileName,
+                        }),
                 },
                 {
                     id: 'download-svg',
                     type: 'button',
                     label: 'Download the chart as SVG',
-                    action: () => console.log('Export to SVG clicked'),
+                    action: () =>
+                        this.highchartsChart.exportChartLocal({
+                            type: 'image/svg+xml',
+                            filename: fileName,
+                        }),
                 },
                 {
                     id: 'download-pdf',
                     type: 'button',
                     label: 'Download the chart as PDF',
-                    action: () => console.log('Export to SVG clicked'),
+                    action: () =>
+                        this.highchartsChart.exportChartLocal({
+                            type: 'application/pdf',
+                            filename: fileName,
+                        }),
                 },
                 {
                     id: 'download-csv',
@@ -83,11 +85,52 @@ export class HighchartsBase extends BaseChart {
         return baseButtons;
     }
 
+    protected async loadHighchartsModules(Highcharts): Promise<typeof import('highcharts')> {
+        await Promise.all([import('highcharts/modules/accessibility')]);
+
+        if (this.options.exportable ?? true) {
+            await Promise.all([
+                import('highcharts/modules/export-data'),
+                import('highcharts/modules/exporting'),
+            ]);
+            await import('highcharts/modules/offline-exporting');
+        }
+
+        return Highcharts;
+    }
+
+    protected override async renderChart(container: HTMLElement): Promise<void> {
+        // Load Highcharts
+        const Highcharts = await this.getHighchartsInstance();
+
+        // Load Highcharts modules
+        await this.loadHighchartsModules(Highcharts);
+
+        console.log('this.getChartOptions()', this.getChartOptions());
+
+        // Render the chart
+        this.highchartsChart = Highcharts.chart(container, this.getChartOptions());
+    }
+
     protected getChartOptions(): Highcharts.Options {
         const Highcharts = this.highchartsInstance;
 
         return {
             lang: lang_nl,
+            exporting: {
+                fallbackToExportServer: false,
+                enabled: false,
+                // buttons: {
+                //     contextButton: {
+                //         menuItems: [], // No menu items
+                //     },
+                // },
+            },
+            credits: {
+                enabled: true,
+                text: this.options.source || '',
+                href: this.options['source-url'] || '',
+            },
             chart: {
                 style: {
                     fontFamily: 'RO Sans, Arial, sans-serif',

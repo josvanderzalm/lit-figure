@@ -1,5 +1,3 @@
-// highcharts-line.ts
-
 import deepmerge from 'deepmerge';
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
@@ -74,24 +72,17 @@ export class HighchartsLine extends HighchartsBaseChart {
                     }),
                 },
             ],
-            exporting: {
-                enabled: options.exportable !== undefined ? options.exportable : true,
-            },
-            credits: {
-                enabled: true,
-                text: options.source || '',
-                href: options['source-url'] || '',
-            },
         };
 
         return deepmerge(super.getChartOptions(), chartOptions);
     }
 
-    protected override async renderChart(container: HTMLElement): Promise<void> {
-        const Highcharts = await this.getHighchartsInstance();
+    protected override async loadHighchartsModules(
+        Highcharts,
+    ): Promise<typeof import('highcharts')> {
+        await super.loadHighchartsModules(Highcharts);
 
-        await Promise.all([import('highcharts/modules/drilldown')]);
-        Highcharts.chart(container, this.getChartOptions());
+        return Highcharts;
     }
 
     render() {

@@ -72,14 +72,6 @@ export class HighchartsSmallMultiple extends HighchartsBaseChart {
                     }),
                 },
             ],
-            exporting: {
-                enabled: options.exportable !== undefined ? options.exportable : true,
-            },
-            credits: {
-                enabled: true,
-                text: options.source || '',
-                href: options['source-url'] || '',
-            },
         };
 
         return deepmerge(super.getChartOptions(), chartOptions);
@@ -95,12 +87,12 @@ export class HighchartsSmallMultiple extends HighchartsBaseChart {
     }
 
     // Override to import the Highcharts library and render the chart
-    protected override async renderChart(container: HTMLElement): Promise<void> {
-        const Highcharts = await this.getHighchartsInstance();
+    // protected override async renderChart(container: HTMLElement): Promise<void> {
+    //     const Highcharts = await this.getHighchartsInstance();
 
-        await Promise.all([import('highcharts/modules/drilldown')]);
-        Highcharts.chart(container, this.getChartOptions());
-    }
+    //     await Promise.all([import('highcharts/modules/drilldown')]);
+    //     Highcharts.chart(container, this.getChartOptions());
+    // }
 
     render() {
         return html`${this.getHtmlTitle()}
