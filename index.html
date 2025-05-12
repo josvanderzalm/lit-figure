@@ -7,13 +7,102 @@
         <style>
             rivm-smdv-figure {
                 margin: 1em 0;
-                display: block;
             }
         </style>
     </head>
 
     <body>
         <h1>SMDV figure</h1>
+
+        <rivm-smdv-figure
+            config-src="http://localhost:5173/config/sm-aantal-meldingen-kinkhoest.json"
+        ></rivm-smdv-figure>
+
+        <!-- <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/sm-aantal-meldingen-kinkhoest.json"></rivm-smdv-figure> -->
+        <hr />
+
+        <rivm-smdv-figure
+            config-src="http://localhost:5173/config/line-pertussis-notifications-per-month-2012-2024.json"
+        ></rivm-smdv-figure>
+
+        <!-- <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/line-pertussis-notifications-per-month-2012-2024.json"></rivm-smdv-figure> -->
+
+        <hr />
+
+        <rivm-smdv-figure
+            config-src="http://localhost:5173/config/column-meldingen-van-babys-met-kinkhoest-2018-2025.json"
+        ></rivm-smdv-figure>
+
+        <!-- <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/column-meldingen-van-babys-met-kinkhoest-2018-2025.json"></rivm-smdv-figure> -->
+
+        <rivm-smdv-figure
+            config-src="http://localhost:5173/config/column-kinkhoest-meldingen-per-jaar-2004-2024.json"
+        ></rivm-smdv-figure>
+
+        <!-- <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/column-kinkhoest-meldingen-per-jaar-2004-2024.json"></rivm-smdv-figure>
+
+    <hr>
+
+    <rivm-smdv-figure config-src="http://localhost:5173/config/column-kinkhoeststerfte-per-jaar-1905-1956.json
+        "></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/column-kinkhoeststerfte-per-jaar-1905-1956.json"></rivm-smdv-figure>
+
+    <hr>
+
+    <rivm-smdv-figure
+        config-src="http://localhost:5173/config/column-kinkhoeststerfte-per-jaar-1957-2024.json"></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/column-kinkhoeststerfte-per-jaar-1957-2024.json"></rivm-smdv-figure>
+
+    <hr>
+
+    <rivm-smdv-figure
+        config-src="http://localhost:5173/config/column-split-ziekenhuisopnames-voor-kinkhoest-leeftijdcategorie-2024.json"></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/column-split-ziekenhuisopnames-voor-kinkhoest-leeftijdcategorie-2024.json"></rivm-smdv-figure>
+
+    <hr>
+
+
+    <hr>
+
+    <rivm-smdv-figure config-src="http://localhost:5173/config/line-split-drg-cases-and-costs.json"></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/line-split-drg-cases-and-costs.json"></rivm-smdv-figure>
+
+    <hr>
+
+    <rivm-smdv-figure
+        config-src="http://localhost:5173/config/map-meldingen-van-kinkhoest-onder-de-totale-bevolking.json"></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/map-meldingen-van-kinkhoest-onder-de-totale-bevolking.json"></rivm-smdv-figure>
+
+    <hr>
+
+    <rivm-smdv-figure config-src="http://localhost:5173/config/sm-aantal-meldingen-kinkhoest.json"></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/sm-aantal-meldingen-kinkhoest.json"></rivm-smdv-figure>
+
+    <hr>
+
+    <rivm-smdv-figure
+        config-src="http://localhost:5173/config/sm-aantal-meldingen-van-kinkhoest-per-100k.json"></rivm-smdv-figure>
+
+    <rivm-smdv-figure sandbox
+        config-src="http://localhost:5173/config/sm-aantal-meldingen-van-kinkhoest-per-100k.json"></rivm-smdv-figure>
+
+    <hr>-->
 
         <!-- <script>
         (function (currentScript) {
@@ -30,57 +119,57 @@
         })(document.currentScript);
     </script> -->
 
-        <script>
-            (function (currentScript) {
-                const options = {
-                    configSrc: 'http://localhost:5173/config/figure.json',
-                };
-                currentScript.parentNode.insertBefore(
-                    Object.assign(document.createElement('rivm-smdv-figure'), {
-                        options,
-                    }),
-                    currentScript.nextSibling,
-                );
-            })(document.currentScript);
-        </script>
+        <!-- <script>
+        (function (currentScript) {
+            const options = {
+                configSrc: 'http://localhost:5173/config/_figure.json',
+            };
+            currentScript.parentNode.insertBefore(
+                Object.assign(document.createElement('rivm-smdv-figure'), {
+                    options,
+                }),
+                currentScript.nextSibling,
+            );
+        })(document.currentScript);
+    </script> -->
 
-        <script>
-            (function (currentScript) {
-                const options = {
-                    dataSrc: './data/_kinkhoestmeldingen.json',
-                    xKey: 'Datum',
-                    yKey: 'Meldingen',
-                    type: 'composite',
-                    library: 'highcharts',
-                    sandbox: false,
-                    title: 'Kinkhoestmeldingen per maand, 2018-2025 (Composite)',
-                    source: 'Bron: RIVM, Osiris',
-                    xAxis: {
-                        zones: [
-                            {
-                                from: '2020-03-01',
-                                to: '2022-03-01',
-                                label: 'periode met corona maatregelen',
-                            },
-                            {
-                                from: '2024-11-01',
-                                to: '2025-01-01',
-                                label: 'Voorlopige cijfers',
-                            },
-                        ],
-                    },
-                    yAxis: {
-                        title: 'Aantal',
-                    },
-                };
-                currentScript.parentNode.insertBefore(
-                    Object.assign(document.createElement('rivm-smdv-figure'), {
-                        options,
-                    }),
-                    currentScript.nextSibling,
-                );
-            })(document.currentScript);
-        </script>
+        <!-- <script>
+        (function (currentScript) {
+            const options = {
+                dataSrc: './data/_kinkhoestmeldingen.json',
+                xKey: 'Datum',
+                yKey: 'Meldingen',
+                type: 'composite',
+                library: 'highcharts',
+                sandbox: false,
+                title: 'Kinkhoestmeldingen per maand, 2018-2025 (Composite)',
+                source: 'Bron: RIVM, Osiris',
+                xAxis: {
+                    zones: [
+                        {
+                            from: '2020-03-01',
+                            to: '2022-03-01',
+                            label: 'periode met corona maatregelen',
+                        },
+                        {
+                            from: '2024-11-01',
+                            to: '2025-01-01',
+                            label: 'Voorlopige cijfers',
+                        },
+                    ],
+                },
+                yAxis: {
+                    title: 'Aantal',
+                },
+            };
+            currentScript.parentNode.insertBefore(
+                Object.assign(document.createElement('rivm-smdv-figure'), {
+                    options,
+                }),
+                currentScript.nextSibling,
+            );
+        })(document.currentScript);
+    </script> -->
 
         <!--<script>
         (function (currentScript) {
@@ -120,44 +209,44 @@
         })(document.currentScript);
     </script> -->
 
-        <script>
-            (function (currentScript) {
-                const options = {
-                    dataSrc: './data/_kinkhoestmeldingen.json',
-                    xKey: 'Datum',
-                    yKey: 'Meldingen_zuigelingen',
-                    type: 'line',
-                    sandbox: true,
-                    title: "Meldingen van baby's met kinkhoest per maand, 2018-2025",
-                    subtitle: 'Periode 2018-2025',
-                    source: 'Bron: RIVM, Osiris',
-                    exportable: true,
-                    xAxis: {
-                        zones: [
-                            {
-                                from: '2020-03-01',
-                                to: '2022-03-01',
-                                label: 'periode met corona maatregelen',
-                            },
-                            {
-                                from: '2024-11-01',
-                                to: '2025-01-01',
-                                label: 'Voorlopige cijfers',
-                            },
-                        ],
-                    },
-                    yAxis: {
-                        title: 'Aantal',
-                    },
-                };
-                currentScript.parentNode.insertBefore(
-                    Object.assign(document.createElement('rivm-smdv-figure'), {
-                        options,
-                    }),
-                    currentScript.nextSibling,
-                );
-            })(document.currentScript);
-        </script>
+        <!-- <script>
+        (function (currentScript) {
+            const options = {
+                dataSrc: './data/_kinkhoestmeldingen.json',
+                xKey: 'Datum',
+                yKey: 'Meldingen_zuigelingen',
+                type: 'line',
+                sandbox: true,
+                title: "Meldingen van baby's met kinkhoest per maand, 2018-2025",
+                subtitle: 'Periode 2018-2025',
+                source: 'Bron: RIVM, Osiris',
+                exportable: true,
+                xAxis: {
+                    zones: [
+                        {
+                            from: '2020-03-01',
+                            to: '2022-03-01',
+                            label: 'periode met corona maatregelen',
+                        },
+                        {
+                            from: '2024-11-01',
+                            to: '2025-01-01',
+                            label: 'Voorlopige cijfers',
+                        },
+                    ],
+                },
+                yAxis: {
+                    title: 'Aantal',
+                },
+            };
+            currentScript.parentNode.insertBefore(
+                Object.assign(document.createElement('rivm-smdv-figure'), {
+                    options,
+                }),
+                currentScript.nextSibling,
+            );
+        })(document.currentScript);
+    </script> -->
 
         <!-- <script>
         (function (currentScript) {

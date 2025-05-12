@@ -1,0 +1,25 @@
+{
+    "dataSrc": "http://localhost:5173/data/column-meldingen-van-babys-met-kinkhoest-2018-2025.json",
+    "xKey": "Datum",
+    "yKey": "Meldingen",
+    "type": "column",
+    "title": "Meldingen van baby's met kinkhoest per maand, 2018-2025",
+    "source": "Bron: RIVM, Osiris",
+    "xAxis": {
+        "zones": [
+            {
+                "from": "2020-03-01",
+                "to": "2022-03-01",
+                "label": "periode met corona maatregelen"
+            },
+            {
+                "from": "2024-11-01",
+                "to": "2025-01-01",
+                "label": "Voorlopige cijfers"
+            }
+        ]
+    },
+    "yAxis": {
+        "title": "Aantal"
+    }
+}

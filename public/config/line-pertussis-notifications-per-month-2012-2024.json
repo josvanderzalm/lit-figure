@@ -1,0 +1,25 @@
+{
+    "dataSrc": "http://localhost:5173/data/line-pertussis-notifications-per-month-2012-2024.json",
+    "xKey": "Datum",
+    "yKey": "Meldingen",
+    "type": "line",
+    "title": "Pertussis notifications per month 2012-2024",
+    "source": "Bron: RIVM, Osiris",
+    "xAxis": {
+        "zones": [
+            {
+                "from": "2020-03-01",
+                "to": "2022-03-01",
+                "label": "periode met corona maatregelen"
+            },
+            {
+                "from": "2024-11-01",
+                "to": "2025-01-01",
+                "label": "Voorlopige cijfers"
+            }
+        ]
+    },
+    "yAxis": {
+        "title": "Aantal"
+    }
+}

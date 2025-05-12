@@ -1,4 +1,4 @@
-// highcharts-line.ts
+// highcharts-column.ts
 
 import deepmerge from 'deepmerge';
 import type * as Highcharts from 'highcharts';
@@ -8,8 +8,8 @@ import { customElement } from 'lit/decorators.js';
 import { HighchartsBaseChart } from '@/components/highcharts/highcharts-base-chart';
 import type { DataItem, Zone } from '@/types';
 
-@customElement('highcharts-line')
-export class HighchartsLine extends HighchartsBaseChart {
+@customElement('highcharts-column')
+export class HighchartsColumn extends HighchartsBaseChart {
     private dateStringToTimestamp = (dateString: string): number | string => {
         const parsedDateString = Date.parse(dateString);
 
@@ -22,7 +22,7 @@ export class HighchartsLine extends HighchartsBaseChart {
         const data = options.dataSet;
         const chartOptions: Highcharts.Options = {
             chart: {
-                type: 'line',
+                type: 'column',
                 width: options.width === '100%' ? null : parseInt(options.width as string, 10),
                 height: parseInt(options.height as string, 10) || 400,
             },
@@ -58,7 +58,7 @@ export class HighchartsLine extends HighchartsBaseChart {
             },
             series: [
                 {
-                    type: 'line',
+                    type: 'column',
                     name: options.yKey || 'Data',
                     data: data?.map((item: DataItem) => {
                         const x =
@@ -95,7 +95,7 @@ export class HighchartsLine extends HighchartsBaseChart {
     }
 
     render() {
-        return html`<p>highcharts-line</p>
+        return html`<p>highcharts-column</p>
             ${super.render()}`;
     }
 }

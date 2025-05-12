@@ -1,15 +1,13 @@
-// highcharts-line.ts
-
 import deepmerge from 'deepmerge';
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import { HighchartsBaseChart } from '@/components/highcharts/highcharts-base-chart';
-import type { DataItem, Zone } from '@/types';
+import type { ActionItem, DataItem, Zone } from '@/types';
 
-@customElement('highcharts-line')
-export class HighchartsLine extends HighchartsBaseChart {
+@customElement('highcharts-small-multiple')
+export class HighchartsSmallMultiple extends HighchartsBaseChart {
     private dateStringToTimestamp = (dateString: string): number | string => {
         const parsedDateString = Date.parse(dateString);
 
@@ -22,15 +20,15 @@ export class HighchartsLine extends HighchartsBaseChart {
         const data = options.dataSet;
         const chartOptions: Highcharts.Options = {
             chart: {
-                type: 'line',
+                type: options.type || 'line',
                 width: options.width === '100%' ? null : parseInt(options.width as string, 10),
                 height: parseInt(options.height as string, 10) || 400,
             },
             title: {
-                text: options.title || '',
+                text: '',
             },
             subtitle: {
-                text: options.subtitle || '',
+                text: '',
             },
             xAxis: {
                 type: (options.xAxis as Highcharts.XAxisOptions)?.type,
@@ -60,7 +58,7 @@ export class HighchartsLine extends HighchartsBaseChart {
                 {
                     type: 'line',
                     name: options.yKey || 'Data',
-                    data: data?.map((item: DataItem) => {
+                    data: data.map((item: DataItem) => {
                         const x =
                             (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
                                 ? this.dateStringToTimestamp(item[options.xKey] as string)
@@ -87,6 +85,16 @@ export class HighchartsLine extends HighchartsBaseChart {
         return deepmerge(super.getChartOptions(), chartOptions);
     }
 
+    // Remove buttons that are not compatible with this chart type
+    override getButtons(): ActionItem[] {
+        return this.unsetButtons(super.getButtons(), [
+            'download-png',
+            'download-svg',
+            'download-pdf',
+        ]);
+    }
+
+    // Override to import the Highcharts library and render the chart
     protected override async renderChart(container: HTMLElement): Promise<void> {
         const Highcharts = await this.getHighchartsInstance();
 
@@ -95,7 +103,8 @@ export class HighchartsLine extends HighchartsBaseChart {
     }
 
     render() {
-        return html`<p>highcharts-line</p>
+        return html`${this.getHtmlTitle()}
+            <p>small-multiple</p>
             ${super.render()}`;
     }
 }

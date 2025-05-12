@@ -1,15 +1,30 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import '../action-menu/action-menu';
 
 import type { ActionItem, DataArray, GroupActionItem, Options } from '@/types';
-import { loadROSansFonts } from '@/utils//index';
+import { loadROSansFonts } from '@/utils/index';
 
 export class BaseChart extends LitElement {
     static styles = css`
         :host {
             font-family: 'RO Sans', Calibri, Verdana, sans-serif;
+        }
+        h1,
+        h2 {
+            font-size: 17px;
+            font-weight: bold;
+            color: rgb(21, 66, 115);
+            line-height: 0.9em;
+        }
+        h1 {
+            margin-bottom: 0;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 14px;
+            font-weight: normal;
         }
     `;
 
@@ -19,7 +34,7 @@ export class BaseChart extends LitElement {
 
     constructor() {
         super();
-        // Derive base_url from the component's own file location
+        // TODO: Derive base_url from the component's own file location
         // Build: http://localhost:4173/assets/assets
         // Dev: http://localhost:5173/src/components/common/base/assets
         this.base_url = new URL('./assets', import.meta.url).href; // Relative to the module location
@@ -73,14 +88,21 @@ export class BaseChart extends LitElement {
                 id: 'show-table',
                 type: 'button',
                 label: 'Show table',
-                action: () => console.log('Show table action clicked'),
+                action: () => console.log('Show table action clicked, data:', this.getTableData()),
             },
         ];
     }
 
     // Get the data needed for rendering the data table
     getTableData(): DataArray {
-        return this.data;
+        return this.options.dataSet;
+    }
+
+    getHtmlTitle() {
+        const htmlTitle = html`<h1>${this.options.title ?? nothing}</h1>`;
+        const htmlSubtitle = html`<h2>${this.options.subtitle ?? nothing}</h2>`;
+
+        return html`${htmlTitle}${htmlSubtitle}`;
     }
 
     // Remove buttons from the ActionItem array
@@ -110,7 +132,7 @@ export class BaseChart extends LitElement {
     render() {
         console.log('base_url', this.base_url);
 
-        return html`<div id="container" style="width:100%; height:100%"></div>
+        return html` <div id="container" style="width:100%; height:100%"></div>
             <action-menu .buttons=${this.getButtons()}></action-menu>`;
     }
 }

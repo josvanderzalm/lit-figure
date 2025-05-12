@@ -12,17 +12,31 @@ export const registry = {
         },
     },
     highcharts: {
-        line: async () => {
-            await import('./highcharts/highcharts-line.js');
+        column: async () => {
+            await import('./highcharts/highcharts-column.js');
 
             return (props: RendererProps) =>
-                html`<highcharts-line .options=${props.options ?? {}}></highcharts-line>`;
+                html`<highcharts-column .options=${props.options ?? {}}></highcharts-column>`;
         },
         composite: async () => {
             await import('./highcharts/highcharts-composite.js');
 
             return (props: RendererProps) =>
                 html`<highcharts-composite .options=${props.options ?? {}}></highcharts-composite>`;
+        },
+        line: async () => {
+            await import('./highcharts/highcharts-line.js');
+
+            return (props: RendererProps) =>
+                html`<highcharts-line .options=${props.options ?? {}}></highcharts-line>`;
+        },
+        'small-multiple': async () => {
+            await import('./highcharts/highcharts-small-multiple.js');
+
+            return (props: RendererProps) =>
+                html`<highcharts-small-multiple
+                    .options=${props.options ?? {}}
+                ></highcharts-small-multiple>`;
         },
     },
     echarts: {

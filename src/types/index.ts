@@ -107,6 +107,9 @@ export interface Options {
     /** Enable iframe sandboxing for isolation */
     sandbox?: boolean;
 
+    /** Field used to group data into series */
+    seriesKey?: string;
+
     /** Source reference (e.g., URL or string) */
     source?: string;
 

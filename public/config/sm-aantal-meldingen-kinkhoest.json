@@ -1,0 +1,16 @@
+{
+    "dataSrc": "http://localhost:5173/data/sm-aantal-meldingen-kinkhoest.json",
+    "xKey": "jaar",
+    "yKey": "value",
+    "seriesKey": "lftcat",
+    "type": "small-multiple",
+    "title": "Aantal meldingen van kinkhoest per leeftijdsgroep, 2004-2024",
+    "subtitle": "*2024 zijn voorlopige cijfers",
+    "source": "Bron: RIVM, Osiris",
+    "xAxis": {
+        "title": "jaar"
+    },
+    "yAxis": {
+        "title": "value"
+    }
+}

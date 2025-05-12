@@ -1,0 +1,26 @@
+{
+    "dataSrc": "http://localhost:5173/data/column-kinkhoest-meldingen-per-jaar-2004-2024.json",
+    "xKey": "year",
+    "yKey": "cases",
+    "type": "column",
+    "title": "Kinkhoestmeldingen per jaar, 2004-2024",
+    "subtitle": "Meldingen voor 2024 zijn tot 16 december",
+    "source": "Bron: RIVM, Osiris",
+    "xAxis": {
+        "zones": [
+            {
+                "from": "2020",
+                "to": "2022",
+                "label": "periode met corona maatregelen"
+            },
+            {
+                "from": "2024-11-01",
+                "to": "2025-01-01",
+                "label": "Voorlopige cijfers"
+            }
+        ]
+    },
+    "yAxis": {
+        "title": "Aantal"
+    }
+}

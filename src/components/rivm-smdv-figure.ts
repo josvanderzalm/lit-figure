@@ -14,6 +14,8 @@ export class RivmSmvdFigure extends LitElement {
         }
     `;
     @property({ type: Object }) options: Options = {};
+    @property({ type: Boolean }) sandbox = false;
+    @property({ type: String, attribute: 'config-src' }) configSrc: string | undefined = undefined;
 
     @state() private _renderer?: (options: RendererProps) => unknown;
     @state() private _isPreprocessingReady = false;
@@ -38,7 +40,7 @@ export class RivmSmvdFigure extends LitElement {
             componentType = 'sandbox';
         } else {
             group = this.options?.library ?? 'highcharts';
-            componentType = this.options?.type ?? 'linex';
+            componentType = this.options?.type ?? 'line';
         }
 
         const loader = typedRegistry[group]?.[componentType];
@@ -46,6 +48,7 @@ export class RivmSmvdFigure extends LitElement {
         if (loader) {
             this._renderer = await loader();
             this.requestUpdate();
+            console.log(`${group}-${componentType} loaded.`);
         } else {
             this._renderer = null;
             this.error_message = `Error: Figure of the type ${group}-${componentType} is not found`;
@@ -54,6 +57,9 @@ export class RivmSmvdFigure extends LitElement {
 
     private async preprocessOptions(options: Options): Promise<Options> {
         let result: Options = { ...options };
+
+        result.configSrc = this.configSrc || this.options.configSrc || undefined;
+        result.sandbox = this.sandbox || this.options.sandbox || false;
 
         if (result.configSrc && !result.configFetched) {
             const config = await this.fetchJSON<Partial<Options>>(result.configSrc);
