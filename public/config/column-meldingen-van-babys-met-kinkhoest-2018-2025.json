@@ -6,6 +6,7 @@
     "exporting": true,
     "title": "Meldingen van baby's met kinkhoest per maand, 2018-2025",
     "source": "Bron: RIVM, Osiris",
+    "colorSchemeOffset": 2,
     "xAxis": {
         "zones": [
             {

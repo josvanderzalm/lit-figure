@@ -81,6 +81,24 @@ export class BaseChart extends LitElement {
         }
     }
 
+    // Offset the color array to create a unique color palette
+    protected colorOffset(offset: number = 0): string[] {
+        const colors = [
+            '#007bc7',
+            '#ffb612',
+            '#ca005d',
+            '#552c6f',
+            '#5EA892',
+            '#e17000',
+            '#39870c',
+            '#673327',
+        ];
+        const len = colors.length;
+        const normalizedOffset = ((offset % len) + len) % len; // handles negative offsets
+
+        return [...colors.slice(normalizedOffset), ...colors.slice(0, normalizedOffset)];
+    }
+
     // Add generic action buttons
     getButtons(): ActionItem[] {
         return [
