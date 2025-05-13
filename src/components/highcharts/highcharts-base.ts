@@ -30,59 +30,40 @@ export class HighchartsBase extends BaseChart {
     getButtons(): ActionItem[] {
         const baseButtons = super.getButtons(); // Get the base buttons
         const fileName = slugify(this.options.title);
+        const newButtons: ActionItem[] = [
+            {
+                id: 'download-png',
+                type: 'button',
+                label: 'Download the chart as PNG',
+                action: () =>
+                    this.highchartsChart.exportChartLocal({
+                        type: 'image/png',
+                        filename: fileName,
+                    }),
+            },
+            {
+                id: 'download-svg',
+                type: 'button',
+                label: 'Download the chart as SVG',
+                action: () =>
+                    this.highchartsChart.exportChartLocal({
+                        type: 'image/svg+xml',
+                        filename: fileName,
+                    }),
+            },
+            {
+                id: 'download-pdf',
+                type: 'button',
+                label: 'Download the chart as PDF',
+                action: () =>
+                    this.highchartsChart.exportChartLocal({
+                        type: 'application/pdf',
+                        filename: fileName,
+                    }),
+            },
+        ];
 
-        // Add Highcharts-specific actions to the list
-        baseButtons.push({
-            id: 'export',
-            type: 'group',
-            label: 'Export',
-            children: [
-                {
-                    id: 'download-png',
-                    type: 'button',
-                    label: 'Download the chart as PNG',
-                    action: () =>
-                        this.highchartsChart.exportChartLocal({
-                            type: 'image/png',
-                            filename: fileName,
-                        }),
-                },
-                {
-                    id: 'download-svg',
-                    type: 'button',
-                    label: 'Download the chart as SVG',
-                    action: () =>
-                        this.highchartsChart.exportChartLocal({
-                            type: 'image/svg+xml',
-                            filename: fileName,
-                        }),
-                },
-                {
-                    id: 'download-pdf',
-                    type: 'button',
-                    label: 'Download the chart as PDF',
-                    action: () =>
-                        this.highchartsChart.exportChartLocal({
-                            type: 'application/pdf',
-                            filename: fileName,
-                        }),
-                },
-                {
-                    id: 'download-csv',
-                    type: 'button',
-                    label: 'Download the data as CSV',
-                    action: () => console.log('Export to CSV clicked'),
-                },
-                {
-                    id: 'download-xls',
-                    type: 'button',
-                    label: 'Download the data as XLS',
-                    action: () => console.log('Export to XLS clicked'),
-                },
-            ],
-        });
-
-        return baseButtons;
+        return this.addButtons(baseButtons, newButtons, 'export', 'before');
     }
 
     protected async loadHighchartsModules(Highcharts): Promise<typeof import('highcharts')> {

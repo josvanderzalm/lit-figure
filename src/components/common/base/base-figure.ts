@@ -108,7 +108,51 @@ export class BaseChart extends LitElement {
                 label: 'Show table',
                 action: () => console.log('Show table action clicked, data:', this.getTableData()),
             },
+            {
+                id: 'export',
+                type: 'group',
+                label: 'Export',
+                children: [
+                    {
+                        id: 'download-csv',
+                        type: 'button',
+                        label: 'Download the data as CSV',
+                        action: () => console.log('Export to CSV clicked'),
+                    },
+                    {
+                        id: 'download-xls',
+                        type: 'button',
+                        label: 'Download the data as XLS',
+                        action: () => console.log('Export to XLS clicked'),
+                    },
+                ],
+            },
         ];
+    }
+
+    // add buttons to the button Array
+    addButtons(
+        existingButtons: ActionItem[],
+        newButtons: ActionItem[],
+        targetGroupId: string,
+        position: 'before' | 'after' = 'after',
+    ): ActionItem[] {
+        return existingButtons.map((item) => {
+            if (item.type === 'group' && item.id === targetGroupId) {
+                const existingChildren = item.children || [];
+                const updatedChildren =
+                    position === 'before'
+                        ? [...newButtons, ...existingChildren]
+                        : [...existingChildren, ...newButtons];
+
+                return {
+                    ...item,
+                    children: updatedChildren,
+                };
+            }
+
+            return item;
+        });
     }
 
     // Get the data needed for rendering the data table
