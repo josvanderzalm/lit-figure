@@ -1,6 +1,6 @@
 import type { DataArray } from '@/types';
 
-export function convertToSeries(data: DataArray[], xKey: string, yKey: string, seriesKey: string) {
+export function convertToSeries(data: DataArray, xKey: string, yKey: string, seriesKey: string) {
     const categories = [...new Set(data.map((item) => item[xKey]))];
     const grouped: Record<string, Record<string, unknown>> = {};
 

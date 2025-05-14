@@ -30,6 +30,12 @@ export const registry = {
             return (props: RendererProps) =>
                 html`<highcharts-line .options=${props.options ?? {}}></highcharts-line>`;
         },
+        map: async () => {
+            await import('./highcharts/highcharts-map.js');
+
+            return (props: RendererProps) =>
+                html`<highcharts-map .options=${props.options ?? {}}></highcharts-map>`;
+        },
         'small-multiple': async () => {
             await import('./highcharts/highcharts-small-multiple.js');
 

@@ -1,1 +1,15 @@
-{}
+{
+    "dataSrc": "http://localhost:5173/data/map-meldingen-van-kinkhoest-onder-de-totale-bevolking.json",
+    "xKey": "year",
+    "yKey": "cases",
+    "type": "map",
+    "mapDivisionCode": "gm",
+    "mapDivisionYear": "2025",
+    "title": "Kinkhoestmeldingen per jaar, 2004-2024",
+    "subtitle": "Meldingen voor 2024 zijn tot 16 december",
+    "source": "Bron: RIVM, Osiris",
+    "xAxis": {},
+    "yAxis": {
+        "title": "Aantal"
+    }
+}

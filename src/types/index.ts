@@ -57,6 +57,11 @@ export type DataArray = { [key: string]: string | number }[];
 // Optional: Stronger type for data items
 export type DataItem = Record<string, unknown>;
 
+// Dictionary for translating keys to labels
+export type Dictionary = {
+    [key: string]: string;
+};
+
 // Main configuration object
 export interface Options {
     /** The color scheme to use */
@@ -77,8 +82,14 @@ export interface Options {
     /** Keep note of data loaded status */
     dataFetched?: boolean;
 
-    /** URL to external data source (JSON or CSV) */
+    /** URL to external data source (JSON) */
     dataSrc?: string;
+
+    /** Dictionary for translating keys to labels */
+    dictionary?: string;
+
+    /** Url to external dictionary (JSON) */
+    dictionarySrc?: string;
 
     /** Enable exporting function */
     exportable?: boolean;
@@ -101,6 +112,9 @@ export interface Options {
     /** the year of the administrative area division code */
     mapDivisionYear?: string;
 
+    /** An array of region codes for  map outlines to add ['pv', 'gg']*/
+    mapOutline?: Array<string>;
+
     /** Key used for pivoting data (e.g., field name) */
     pivotField?: string;
 
@@ -121,6 +135,9 @@ export interface Options {
 
     /** Chart type (e.g., "bar", "line", "sankey") */
     type?: string;
+
+    /** The type to use in a composite chart */
+    subType?: 'line' | 'bar' | 'column';
 
     /** Width of the chart container; accepts a string (e.g., "400px", "50%") or a number (e.g., 400 → "400px"). */
     width?: string | number;

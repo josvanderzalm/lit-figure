@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge';
 import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
@@ -50,6 +51,12 @@ export class BaseChart extends LitElement {
     shouldUpdate(changedProperties: Map<string | number | symbol, unknown>): boolean {
         // Only update if options or data have changed
         return changedProperties.has('options') || changedProperties.has('data');
+    }
+
+    deepmerge(a, b) {
+        const overwriteMerge = (_destinationArray, sourceArray) => sourceArray;
+
+        return deepmerge(a, b, { arrayMerge: overwriteMerge });
     }
 
     // Called after the first render
@@ -155,11 +162,17 @@ export class BaseChart extends LitElement {
         });
     }
 
+    // Get the data needed for rendering the figure
+    getFigureData(): DataArray {
+        return this.options.dataSet;
+    }
+
     // Get the data needed for rendering the data table
     getTableData(): DataArray {
         return this.options.dataSet;
     }
 
+    // Return the title and subtitle of the chart as HTML
     getHtmlTitle() {
         const htmlTitle = html`<h1>${this.options.title ?? nothing}</h1>`;
         const htmlSubtitle = html`<h2>${this.options.subtitle ?? nothing}</h2>`;

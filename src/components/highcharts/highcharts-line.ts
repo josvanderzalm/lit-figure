@@ -1,4 +1,3 @@
-import deepmerge from 'deepmerge';
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -17,7 +16,7 @@ export class HighchartsLine extends HighchartsBaseChart {
     // Override to combine base options and additional chart options
     protected override getChartOptions(): Highcharts.Options {
         const options = this.options;
-        const data = options.dataSet;
+        const data = this.getFigureData();
         const chartOptions: Highcharts.Options = {
             chart: {
                 type: 'line',
@@ -74,16 +73,16 @@ export class HighchartsLine extends HighchartsBaseChart {
             ],
         };
 
-        return deepmerge(super.getChartOptions(), chartOptions);
+        return this.deepmerge(super.getChartOptions(), chartOptions);
     }
 
-    protected override async loadHighchartsModules(
-        Highcharts,
-    ): Promise<typeof import('highcharts')> {
-        await super.loadHighchartsModules(Highcharts);
+    // protected override async loadHighchartsModules(
+    //     Highcharts,
+    // ): Promise<typeof import('highcharts')> {
+    //     await super.loadHighchartsModules(Highcharts);
 
-        return Highcharts;
-    }
+    //     return Highcharts;
+    // }
 
     render() {
         return html`<p>highcharts-line</p>

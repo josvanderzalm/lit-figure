@@ -29,7 +29,7 @@ export class HighchartsBase extends BaseChart {
     // Add generic action buttons
     getButtons(): ActionItem[] {
         const baseButtons = super.getButtons(); // Get the base buttons
-        const fileName = slugify(this.options.title);
+        const fileName = slugify(this.options.title ?? '');
         const newButtons: ActionItem[] = [
             {
                 id: 'download-png',
@@ -63,7 +63,7 @@ export class HighchartsBase extends BaseChart {
             },
         ];
 
-        return this.addButtons(baseButtons, newButtons, 'export', 'before');
+        return this.addButtons(baseButtons, newButtons, 'export', 'after');
     }
 
     protected async loadHighchartsModules(Highcharts): Promise<typeof import('highcharts')> {
@@ -90,7 +90,10 @@ export class HighchartsBase extends BaseChart {
         console.log('this.getChartOptions()', this.getChartOptions());
 
         // Render the chart
-        this.highchartsChart = Highcharts.chart(container, this.getChartOptions());
+        const chartMethod =
+            typeof Highcharts.mapChart === 'function' ? Highcharts.mapChart : Highcharts.chart;
+
+        this.highchartsChart = chartMethod(container, this.getChartOptions());
     }
 
     protected getChartOptions(): Highcharts.Options {
