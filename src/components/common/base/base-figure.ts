@@ -2,6 +2,7 @@ import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import '../action-menu/action-menu';
+import '@/components/common/table';
 
 import type { ActionItem, DataArray, GroupActionItem, Options } from '@/types';
 import { loadROSansFonts } from '@/utils/index';
@@ -157,6 +158,8 @@ export class BaseChart extends LitElement {
 
     // Get the data needed for rendering the data table
     getTableData(): DataArray {
+        console.log(this.options.dataSet);
+
         return this.options.dataSet;
     }
 
@@ -195,6 +198,7 @@ export class BaseChart extends LitElement {
         console.log('base_url', this.base_url);
 
         return html` <div id="container" style="width:100%; height:100%"></div>
+            <table-wrapper .data=${this.getTableData()}></table-wrapper>
             <action-menu .buttons=${this.getButtons()}></action-menu>`;
     }
 }
