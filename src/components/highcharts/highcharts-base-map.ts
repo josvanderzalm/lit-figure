@@ -1,21 +1,9 @@
-import type * as Highcharts from 'highcharts';
+import * as Highcharts from 'highcharts';
 
 import { HighchartsBase } from '@/components/highcharts/highcharts-base';
+import { getHighchartsDataClasses } from '@/utils';
 
 export class HighchartsBaseMap extends HighchartsBase {
-    protected override async loadHighchartsModules(
-        Highcharts,
-    ): Promise<typeof import('highcharts')> {
-        await super.loadHighchartsModules(Highcharts);
-        await import('highcharts/modules/map');
-
-        return Highcharts;
-    }
-
-    protected override getChartOptions(): Highcharts.Options {
-        return this.deepmerge(super.getChartOptions(), this.highchartsBaseMapOptions);
-    }
-
     private highchartsBaseMapOptions: Highcharts.Options = {
         chart: {
             style: {
@@ -24,43 +12,12 @@ export class HighchartsBaseMap extends HighchartsBase {
             backgroundColor: '#ffffff',
             spacing: [5, 20, 35, 0],
             margin: [50, 5, 5, 0],
-
             height: 531,
         },
         colors: ['#f2e0ff', '#ceb2e0', '#ab89c2', '#8b65a4', '#6d4786', '#512e68'],
-        title: {
-            align: 'left',
-            style: {
-                fontSize: '17px',
-                fontWeight: 'bold',
-                color: '#154273',
-            },
-            margin: 30,
-        },
-        subtitle: {
-            align: 'left',
-            style: {
-                fontSize: '14px',
-                fontWeight: 'normal',
-                color: '#154273',
-                transform: 'translate(0, -7px)', //Prevent subtitle to be overwritten by multiple-line title
-            },
-        },
-        credits: {
-            enabled: true,
-            text: '',
-            href: '',
-            style: {
-                fontSize: '12px',
-                fontStyle: 'italic',
-                color: '#505050',
-                cursor: 'default',
-            },
-            position: {
-                verticalAlign: 'bottom',
-                align: 'left',
-                x: 0,
-            },
+        colorAxis: {
+            maxColor: '#007bc7',
+            minColor: '#dbebf5',
         },
         legend: {
             title: {
@@ -96,9 +53,7 @@ export class HighchartsBaseMap extends HighchartsBase {
         plotOptions: {
             series: {
                 allowPointSelect: false,
-                animation: {
-                    duration: 800,
-                },
+                animation: { duration: 800 },
                 states: {
                     select: {
                         enabled: false,
@@ -110,12 +65,8 @@ export class HighchartsBaseMap extends HighchartsBase {
                     hover: {
                         lineWidthPlus: 1.5,
                         borderColor: '#ffffff',
-                        halo: {
-                            size: 0,
-                        },
-                        animation: {
-                            duration: 0,
-                        },
+                        halo: { size: 0 },
+                        animation: { duration: 0 },
                     },
                     inactive: {
                         enabled: false,
@@ -127,19 +78,19 @@ export class HighchartsBaseMap extends HighchartsBase {
             enabled: true,
             buttons: {
                 zoomIn: {
-                    text: '\u002B',
+                    text: '+',
                     y: -38,
                 },
-                // @ts-expect-error: zoomReset is a valid runtime option even though it's not in the TS type
+                // @ts-expect-error: zoomReset is valid at runtime
                 zoomReset: {
-                    text: '\u2609',
+                    text: '☉',
                     y: -15,
                     onclick: function () {
                         this.zoomOut();
                     },
                 },
                 zoomOut: {
-                    text: '\u2013',
+                    text: '–',
                     y: 8,
                 },
             },
@@ -189,24 +140,38 @@ export class HighchartsBaseMap extends HighchartsBase {
                 width: 12,
             },
         },
-        responsive: {
-            rules: [
-                {
-                    condition: {
-                        // callback: function () {
-                        //     //console.log(this.index, this.options.chart.type, this.title.textStr);
-                        //     var type = this.options.chart.type;
-                        //     //console.log(this.options.chart.type);
-                        //     return type === 'map' && this.chartWidth < 501;
-                        // },
-                    },
-                    chartOptions: {
-                        credits: {
-                            enabled: false,
-                        },
-                    },
-                },
-            ],
-        },
     };
+
+    protected override async loadHighchartsModules(
+        Highcharts: typeof import('highcharts'),
+    ): Promise<typeof import('highcharts')> {
+        await super.loadHighchartsModules(Highcharts);
+        await import('highcharts/modules/map');
+
+        return Highcharts;
+    }
+
+    protected override getChartOptions(): Highcharts.Options {
+        const dataClasses = this.getDataClasses();
+
+        (this.highchartsBaseMapOptions.colorAxis as Highcharts.ColorAxisOptions).dataClasses =
+            dataClasses;
+
+        return this.deepmerge(super.getChartOptions(), this.highchartsBaseMapOptions);
+    }
+
+    private getDataClasses(): Highcharts.ColorAxisDataClassesOptions[] {
+        const { dataSet, mapKey } = this.options;
+        const seriesData = dataSet.map((item) => Number(item[mapKey]));
+
+        return getHighchartsDataClasses(
+            seriesData,
+            'equalInterval',
+            9,
+            '#f7fcfd',
+            '#00441b',
+            1,
+            'nl-NL',
+        );
+    }
 }

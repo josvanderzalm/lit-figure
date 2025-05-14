@@ -114,12 +114,12 @@ export class HighchartsSmallMultiple extends HighchartsBaseChart {
                     name: options.yKey || 'Data',
                     data: data.map((item) => {
                         const x =
-                            options.xAxis?.type === 'datetime'
-                                ? this.dateStringToTimestamp(item[options.xKey])
+                            (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
+                                ? this.dateStringToTimestamp(item[options.xKey] as string)
                                 : item[options.xKey];
                         const y =
                             options['y-axis']?.type === 'datetime'
-                                ? this.dateStringToTimestamp(item[options.yKey])
+                                ? this.dateStringToTimestamp(item[options.yKey] as string)
                                 : item[options.yKey];
 
                         return [x, y];

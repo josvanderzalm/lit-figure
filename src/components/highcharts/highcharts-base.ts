@@ -141,6 +141,7 @@ export class HighchartsBase extends BaseChart {
             },
             colors: this.colorOffset(this.options?.colorSchemeOffset ?? 0),
             title: {
+                text: this.options.title || '',
                 align: 'left',
                 style: {
                     fontSize: '17px',
@@ -150,6 +151,8 @@ export class HighchartsBase extends BaseChart {
                 margin: 30,
             },
             subtitle: {
+                text: this.options.subtitle || '',
+
                 align: 'left',
                 style: {
                     fontSize: '14px',

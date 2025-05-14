@@ -115,6 +115,21 @@ export interface Options {
     /** An array of region codes for  map outlines to add ['pv', 'gg']*/
     mapOutline?: Array<string>;
 
+    /** The field name to use for map data to the Geojson */
+    mapRegionKey?: string;
+
+    /** Algorithm to use for data classes or number aray with manual classes */
+    mapDataClasses?: 'equalInterval' | 'quantile' | 'jenks' | 'ckmeans' | Array<number>;
+
+    /** The field name to use for map data */
+    mapKey?: string;
+
+    /** Label for the map value */
+    mapKeyLabel?: string;
+
+    /** The number of data classes to use for the map */
+    mapDataClassesCount?: number;
+
     /** Key used for pivoting data (e.g., field name) */
     pivotField?: string;
 

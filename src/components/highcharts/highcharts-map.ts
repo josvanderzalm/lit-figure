@@ -25,25 +25,11 @@ export class HighchartsMap extends HighchartsBaseMap {
     }
 
     protected override getChartOptions(): Highcharts.Options {
-        //const options = this.options;
-        //const data = this.getFigureData();
-        const data: [string, number][] = [
-            ['GM1680', 728],
-            ['GM0363', 710],
-            ['GM0503', 963],
-            ['GM0738', 541],
-            ['GM1700', 622],
-            ['GM0200', 866],
-            ['GM0384', 398],
-            // Add more data that matches actual gm_code values in your GeoJSON
-        ];
+        console.log('this.dataSet', this.options.dataSet);
+
         const chartOptions: Highcharts.Options = {
             chart: {
                 map: this.geojson,
-            },
-
-            title: {
-                text: 'GeoJSON in Highmaps',
             },
 
             accessibility: {
@@ -64,9 +50,11 @@ export class HighchartsMap extends HighchartsBaseMap {
             series: [
                 {
                     type: 'map',
-                    data: data,
-                    keys: ['gm_code', 'value'],
-                    joinBy: 'gm_code',
+                    data: this.options.dataSet.map((item) => ({
+                        code: item[this.options.mapRegionKey],
+                        value: Number(item[this.options.mapKey]),
+                    })),
+                    joinBy: ['gm_code', 'code'],
                     name: 'Random data',
                 },
             ],

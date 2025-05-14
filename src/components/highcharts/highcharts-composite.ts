@@ -23,12 +23,6 @@ export class HighchartsLine extends HighchartsBaseChart {
                 width: options.width === '100%' ? null : parseInt(options.width as string, 10),
                 height: parseInt(options.height as string, 10) || 400,
             },
-            title: {
-                text: options.title || '',
-            },
-            subtitle: {
-                text: options.subtitle || '',
-            },
             xAxis: {
                 type: (options.xAxis as Highcharts.XAxisOptions)?.type,
                 title: {
