@@ -1,3 +1,8 @@
+/*
+ * This product includes color specifications and designs developed by Cynthia
+ * Brewer (http://colorbrewer.org/).
+ */
+
 import { BrBG } from './diverging/BrBG';
 import { PiYG } from './diverging/PiYG';
 import { PRGn } from './diverging/PRGn';
