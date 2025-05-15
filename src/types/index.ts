@@ -51,6 +51,47 @@ export type ButtonDef = {
     icon?: string; // optional, for styling
 };
 
+// Available color schemes
+export type ColorScheme =
+    | 'Standard'
+    | 'Gender'
+    | 'GenderAlt'
+    | 'Spectral'
+    | 'RdYlGn'
+    | 'RdBu'
+    | 'PiYG'
+    | 'PRGn'
+    | 'RdYlBu'
+    | 'BrBG'
+    | 'RdGy'
+    | 'PuOr'
+    | 'Set2'
+    | 'Accent'
+    | 'Set1'
+    | 'Set3'
+    | 'Dark2'
+    | 'Paired'
+    | 'Pastel2'
+    | 'Pastel1'
+    | 'OrRd'
+    | 'PuBu'
+    | 'BuPu'
+    | 'Oranges'
+    | 'BuGn'
+    | 'YlOrBr'
+    | 'YlGn'
+    | 'Reds'
+    | 'RdPu'
+    | 'Greens'
+    | 'YlGnBu'
+    | 'Purples'
+    | 'GnBu'
+    | 'Greys'
+    | 'YlOrRd'
+    | 'PuRd'
+    | 'Blues'
+    | 'PuBuGn';
+
 // data array
 export type DataArray = { [key: string]: string | number }[];
 
@@ -65,10 +106,13 @@ export type Dictionary = {
 // Main configuration object
 export interface Options {
     /** The color scheme to use */
-    colorScheme?: 'standard' | 'gender' | 'gender-alternative';
+    colorScheme?: ColorScheme;
 
     /** Offset for color scheme */
     colorSchemeOffset?: number;
+
+    /** Revers the order of the color in the color scheme */
+    reverseColorScheme?: boolean;
 
     /** Keep note of config loaded status */
     configFetched?: boolean;

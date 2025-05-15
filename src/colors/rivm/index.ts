@@ -1,5 +1,5 @@
-import { gender } from './gender';
-import { genderAlt } from './genderAlt';
-import { standard } from './standard';
+import { Gender } from './Gender';
+import { GenderAlt } from './GenderAlt';
+import { Standard } from './Standard';
 
-export { gender, genderAlt, standard };
+export { Gender, GenderAlt, Standard };

@@ -1,4 +1,4 @@
-export const standard = [
+export const Standard = [
     '#007bc7',
     '#ffb612',
     '#ca005d',
