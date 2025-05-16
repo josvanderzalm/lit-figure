@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 import type { ActionItem, ButtonActionItem, GroupActionItem } from '@/types';
 
@@ -66,121 +66,136 @@ export class ActionMenu extends LitElement {
 
     @property({ type: Array }) buttons: ActionItem[] = [];
 
-    private openGroupIndex: number | null = null;
+    @state() private openGroupIndex: number | null = null;
     private closeTimer: number | null = null;
 
-    private handleClick(action?: () => void, groupIndex?: number) {
-        if (action) {
-            action();
+    private handleItemClick = (e: Event) => {
+        const target = e.currentTarget as HTMLElement;
+        const groupIndex = target.dataset.groupIndex ? parseInt(target.dataset.groupIndex) : null;
+        const itemIndex = parseInt(target.dataset.itemIndex!);
+
+        if (groupIndex !== null) {
+            const group = this.buttons[groupIndex] as GroupActionItem;
+            const item = group.children[itemIndex] as ButtonActionItem;
+
+            item.action?.();
+            this.closeSubMenu();
+        } else {
+            const item = this.buttons[itemIndex] as ButtonActionItem;
+
+            item.action?.();
             this.closeSubMenu();
         }
+    };
 
-        if (groupIndex !== undefined) {
-            this.toggleSubMenu(groupIndex);
-        }
-    }
+    private handleGroupClick = (e: Event) => {
+        const target = e.currentTarget as HTMLElement;
+        const index = parseInt(target.dataset.groupIndex!);
+
+        this.toggleSubMenu(index);
+    };
 
     private toggleSubMenu(groupIndex: number) {
-        if (this.openGroupIndex !== null && this.openGroupIndex !== groupIndex) {
-            this.closeSubMenu();
-        }
-
         this.openGroupIndex = this.openGroupIndex === groupIndex ? null : groupIndex;
-        this.requestUpdate();
     }
 
     private closeSubMenu() {
         this.openGroupIndex = null;
-        if (this.closeTimer) {
-            clearTimeout(this.closeTimer);
-        }
-        this.requestUpdate();
+        if (this.closeTimer) clearTimeout(this.closeTimer);
     }
 
-    private handleMouseOut() {
-        if (this.closeTimer) {
-            clearTimeout(this.closeTimer);
-        }
+    private handleMouseOut = () => {
+        if (this.closeTimer) clearTimeout(this.closeTimer);
         this.closeTimer = window.setTimeout(() => this.closeSubMenu(), 1500);
-    }
+    };
 
-    private cancelCloseTimer() {
-        if (this.closeTimer) {
-            clearTimeout(this.closeTimer);
-            this.closeTimer = null;
-        }
-    }
+    private cancelCloseTimer = () => {
+        if (this.closeTimer) clearTimeout(this.closeTimer);
+        this.closeTimer = null;
+    };
 
-    private handleKeyDown(e: KeyboardEvent) {
+    private handleKeyDown = (e: KeyboardEvent) => {
         const buttons = Array.from(this.shadowRoot!.querySelectorAll<HTMLButtonElement>('.button'));
         const currentIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
 
-        if (e.key === 'ArrowRight') {
-            console.log('Right arrow pressed');
+        switch (e.key) {
+            case 'ArrowRight': {
+                const next = (currentIndex + 1) % buttons.length;
 
-            const next = (currentIndex + 1) % buttons.length;
-
-            buttons[next].focus();
-            e.preventDefault();
-        } else if (e.key === 'ArrowLeft') {
-            console.log('Left arrow pressed');
-
-            const prev = (currentIndex - 1 + buttons.length) % buttons.length;
-
-            buttons[prev].focus();
-            e.preventDefault();
-        } else if (e.key === 'ArrowDown') {
-            console.log('Down arrow pressed');
-
-            const current = document.activeElement as HTMLButtonElement;
-            const submenu = current?.parentElement?.querySelector('.submenu');
-            const submenuButtons = submenu?.querySelectorAll<HTMLButtonElement>('button');
-
-            if (submenuButtons && submenuButtons.length > 0) {
-                submenuButtons[0].focus();
+                buttons[next].focus();
                 e.preventDefault();
+                break;
             }
-        } else if (e.key === 'ArrowUp') {
-            console.log('Up arrow pressed');
+            case 'ArrowLeft': {
+                const prev = (currentIndex - 1 + buttons.length) % buttons.length;
 
-            const parent = (document.activeElement as HTMLElement).closest('.menu-group');
-            const groupButton = parent?.querySelector<HTMLButtonElement>('button.button');
-
-            if (groupButton) {
-                groupButton.focus();
+                buttons[prev].focus();
                 e.preventDefault();
+                break;
             }
-        } else if (e.key === 'Escape') {
-            this.closeSubMenu();
+            case 'ArrowDown': {
+                const current = document.activeElement as HTMLElement;
+                const group = current.closest('.menu-group');
+                const groupIndex = Array.from(
+                    this.shadowRoot!.querySelectorAll('.menu-group'),
+                ).indexOf(group!);
+
+                if (group && groupIndex !== -1) {
+                    this.openGroupIndex = groupIndex;
+                    this.requestUpdate();
+
+                    const submenu = group.querySelector('.submenu');
+                    const submenuButtons = submenu?.querySelectorAll<HTMLButtonElement>('button');
+
+                    submenuButtons?.[0]?.focus();
+                    e.preventDefault();
+                }
+                break;
+            }
+            case 'ArrowUp': {
+                const parent = (document.activeElement as HTMLElement).closest('.menu-group');
+                const groupButton = parent?.querySelector<HTMLButtonElement>('button.button');
+
+                groupButton?.focus();
+                e.preventDefault();
+                break;
+            }
+            case 'Escape': {
+                const parent = (document.activeElement as HTMLElement).closest('.menu-group');
+                const groupButton = parent?.querySelector<HTMLButtonElement>('button.button');
+
+                groupButton?.focus();
+                this.closeSubMenu();
+                e.preventDefault();
+                break;
+            }
         }
-    }
+    };
 
     render() {
         return html`
-            <div class="menu" @keydown=${this.handleKeyDown}>
+            <div class="menu" @keydown=${this.handleKeyDown} role="menubar">
                 ${this.buttons.map((item, index) => {
                     if (item.type === 'button') {
-                        const buttonItem = item as ButtonActionItem;
+                        const btn = item as ButtonActionItem;
 
                         return html`
                             <button
-                                @click=${() => this.handleClick(buttonItem.action)}
-                                tabindex="0"
                                 class="button"
+                                role="menuitem"
+                                aria-label=${btn.label}
+                                data-item-index=${index}
+                                tabindex="0"
+                                @click=${this.handleItemClick}
                             >
-                                ${buttonItem.icon
-                                    ? html`<img
-                                          src="${buttonItem.icon}"
-                                          alt="${buttonItem.label} icon"
-                                      />`
-                                    : ''}
-                                ${buttonItem.label}
+                                ${btn.icon ? html`<img src="${btn.icon}" alt="" />` : ''}
+                                ${btn.label}
                             </button>
                         `;
                     }
 
                     if (item.type === 'group') {
-                        const groupItem = item as GroupActionItem;
+                        const group = item as GroupActionItem;
                         const isOpen = this.openGroupIndex === index;
 
                         return html`
@@ -190,42 +205,44 @@ export class ActionMenu extends LitElement {
                                 @mouseleave=${this.handleMouseOut}
                             >
                                 <button
-                                    @click=${() => this.handleClick(undefined, index)}
-                                    tabindex="0"
                                     class="button"
+                                    role="menuitem"
+                                    aria-haspopup="true"
+                                    aria-expanded=${isOpen}
+                                    aria-label=${group.label}
+                                    data-group-index=${index}
+                                    tabindex="0"
+                                    @click=${this.handleGroupClick}
                                 >
-                                    ${groupItem.icon
-                                        ? html`<img
-                                              src="${groupItem.icon}"
-                                              alt="${groupItem.label} icon"
-                                          />`
-                                        : ''}
-                                    ${groupItem.label}
+                                    ${group.icon ? html`<img src="${group.icon}" alt="" />` : ''}
+                                    ${group.label}
                                     <span class="chevron"></span>
                                 </button>
                                 <div
                                     class="submenu"
+                                    role="menu"
+                                    aria-label="Submenu of ${group.label}"
                                     @mouseenter=${this.cancelCloseTimer}
                                     @mouseleave=${this.handleMouseOut}
                                 >
-                                    ${groupItem.children.map((child, subIndex) => {
+                                    ${group.children.map((child, childIndex) => {
                                         if (child.type === 'button') {
-                                            const buttonChild = child as ButtonActionItem;
+                                            const subBtn = child as ButtonActionItem;
 
                                             return html`
                                                 <button
-                                                    @click=${() =>
-                                                        this.handleClick(buttonChild.action)}
-                                                    tabindex="${subIndex}"
                                                     class="button"
+                                                    role="menuitem"
+                                                    aria-label=${subBtn.label}
+                                                    data-group-index=${index}
+                                                    data-item-index=${childIndex}
+                                                    tabindex="0"
+                                                    @click=${this.handleItemClick}
                                                 >
-                                                    ${buttonChild.icon
-                                                        ? html`<img
-                                                              src="${buttonChild.icon}"
-                                                              alt="${buttonChild.label} icon"
-                                                          />`
+                                                    ${subBtn.icon
+                                                        ? html`<img src="${subBtn.icon}" alt="" />`
                                                         : ''}
-                                                    ${buttonChild.label}
+                                                    ${subBtn.label}
                                                 </button>
                                             `;
                                         }

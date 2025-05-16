@@ -48,7 +48,6 @@ export class RivmSmvdFigure extends LitElement {
         if (loader) {
             this._renderer = await loader();
             this.requestUpdate();
-            console.log(`${group}-${componentType} loaded.`);
         } else {
             this._renderer = null;
             this.error_message = `Error: Figure of the type ${group}-${componentType} is not found`;
