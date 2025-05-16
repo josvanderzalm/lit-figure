@@ -11,7 +11,7 @@
 - base_url see base-figere.ts
 - Error handling
 - Series functions
-- Implement scoped elements: https://open-wc.org/docs/development/scoped-elements/
+- Implement scoped elements: https://open-wc.org/docs/development/scoped-elements/ https://lion.js.org/guides/principles/scoped-elements/
 - Pick component implementation method:
 
 ```js
