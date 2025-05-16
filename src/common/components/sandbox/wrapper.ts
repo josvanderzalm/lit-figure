@@ -13,7 +13,7 @@ export class SandboxWrapper extends LitElement {
     @state()
     private _iframeHeight = '10px'; // Initial height
 
-    protected firstUpdated(_changedProperties: Map<string | number | symbol, unknown>): void {
+    firstUpdated(_changedProperties: Map<string | number | symbol, unknown>): void {
         super.firstUpdated(_changedProperties);
         this._iframe.addEventListener('load', () => {
             this._sendOptionsToIframe();
@@ -21,7 +21,7 @@ export class SandboxWrapper extends LitElement {
         window.addEventListener('message', this._handleIframeMessage);
     }
 
-    protected updated(_changedProperties: Map<string | number | symbol, unknown>): void {
+    updated(_changedProperties: Map<string | number | symbol, unknown>): void {
         super.updated(_changedProperties);
         if (_changedProperties.has('options') && this._iframe?.contentWindow) {
             this._sendOptionsToIframe();

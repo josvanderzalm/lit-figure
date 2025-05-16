@@ -1,143 +1,138 @@
-import type * as Highcharts from 'highcharts';
-import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+// import type * as Highcharts from 'highcharts';
+// import { html } from 'lit';
+// import { customElement } from 'lit/decorators.js';
 
-import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
-import type { ActionItem, DataItem, Zone } from '@/types';
+// import { dateStringToTimestamp } from '@/common/utils/data/date-string-to-timestamp';
+// import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
+// import type { ActionItem, DataItem, Zone } from '@/types';
 
-@customElement('highcharts-small-multiple')
-export class HighchartsSmallMultiple extends HighchartsBaseChart {
-    private chartIds: string[] = [];
+// @customElement('highcharts-small-multiple')
+// export class HighchartsSmallMultiple extends HighchartsBaseChart {
+//     private chartIds: string[] = [];
 
-    private dateStringToTimestamp = (dateString: string): number | string => {
-        const parsedDateString = Date.parse(dateString);
+//     protected override getButtons(): ActionItem[] {
+//         return this.unsetButtons(super.getButtons(), [
+//             'download-png',
+//             'download-svg',
+//             'download-pdf',
+//         ]);
+//     }
 
-        return isNaN(parsedDateString) ? dateString : parsedDateString;
-    };
+//     protected override async renderChart(): Promise<void> {
+//         const Highcharts = await this.getHighchartsInstance();
 
-    override getButtons(): ActionItem[] {
-        return this.unsetButtons(super.getButtons(), [
-            'download-png',
-            'download-svg',
-            'download-pdf',
-        ]);
-    }
+//         await import('highcharts/modules/drilldown');
 
-    override async renderChart(): Promise<void> {
-        const Highcharts = await this.getHighchartsInstance();
+//         const groupedData = this.getGroupedData();
 
-        await import('highcharts/modules/drilldown');
+//         groupedData.forEach((group, index) => {
+//             const containerId = this.chartIds[index];
+//             const container = this.shadowRoot?.getElementById(containerId);
 
-        const groupedData = this.getGroupedData();
+//             if (!container) return;
 
-        groupedData.forEach((group, index) => {
-            const containerId = this.chartIds[index];
-            const container = this.shadowRoot?.getElementById(containerId);
+//             const chartOptions = this.getChartOptionsForGroup(group.name, group.data, index);
 
-            if (!container) return;
+//             Highcharts.chart(container, chartOptions);
+//         });
+//     }
 
-            const chartOptions = this.getChartOptionsForGroup(group.name, group.data, index);
+//     private getGroupedData(): { name: string; data: DataItem[] }[] {
+//         const data = this.getFigureData();
+//         const key = this.options.seriesKey;
 
-            Highcharts.chart(container, chartOptions);
-        });
-    }
+//         if (!key) return [{ name: 'All', data }];
 
-    private getGroupedData(): { name: string; data: DataItem[] }[] {
-        const data = this.getFigureData();
-        const key = this.options.seriesKey;
+//         const groups: Record<string, DataItem[]> = {};
 
-        if (!key) return [{ name: 'All', data }];
+//         data.forEach((item) => {
+//             const groupKey = item[key] || 'Unknown';
 
-        const groups: Record<string, DataItem[]> = {};
+//             if (!groups[groupKey]) groups[groupKey] = [];
+//             groups[groupKey].push(item);
+//         });
 
-        data.forEach((item) => {
-            const groupKey = item[key] || 'Unknown';
+//         return Object.entries(groups).map(([name, data]) => ({ name, data }));
+//     }
 
-            if (!groups[groupKey]) groups[groupKey] = [];
-            groups[groupKey].push(item);
-        });
+//     private async getChartOptionsForGroup(
+//         name: string,
+//         data: DataItem[],
+//         index: number,
+//     ): Promise<Highcharts.Options> {
+//         const options = this.options;
 
-        return Object.entries(groups).map(([name, data]) => ({ name, data }));
-    }
+//         console.log(index);
 
-    private async getChartOptionsForGroup(
-        name: string,
-        data: DataItem[],
-        index: number,
-    ): Promise<Highcharts.Options> {
-        const options = this.options;
+//         return this.mergeOptions(super.getChartOptions(), {
+//             chart: {
+//                 type: 'column',
+//                 height: 200,
+//                 width: 300,
+//             },
+//             //colors: this.colorOffset(index),
+//             title: {
+//                 text: name,
+//                 style: {
+//                     fontSize: '15px',
+//                     fontWeight: 'bold',
+//                     color: '#154273',
+//                 },
+//             },
+//             xAxis: {
+//                 type: (options.xAxis as Highcharts.XAxisOptions)?.type,
+//                 title: {
+//                     text: options.xAxis?.title || '',
+//                 },
+//                 plotBands:
+//                     options.xAxis?.zones?.map((zone: Zone) => ({
+//                         from: dateStringToTimestamp(zone.from),
+//                         to: dateStringToTimestamp(zone.to),
+//                         color: 'rgba(200, 200, 200, 0.2)',
+//                         label: {
+//                             text: zone.label,
+//                             style: {
+//                                 color: '#666',
+//                                 fontSize: '10px',
+//                             },
+//                         },
+//                     })) || [],
+//             },
+//             yAxis: {
+//                 title: {
+//                     text: options['y-axis']?.title || '',
+//                 },
+//             },
+//             series: [
+//                 {
+//                     type: 'column',
+//                     name: options.yKey || 'Data',
+//                     data: data.map((item) => {
+//                         const x =
+//                             (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
+//                                 ? dateStringToTimestamp(item[options.xKey] as string)
+//                                 : item[options.xKey];
+//                         const y =
+//                             options['y-axis']?.type === 'datetime'
+//                                 ? dateStringToTimestamp(item[options.yKey] as string)
+//                                 : item[options.yKey];
 
-        console.log(index);
+//                         return [x, y];
+//                     }),
+//                 },
+//             ],
+//         });
+//     }
 
-        return this.deepmerge(super.getChartOptions(), {
-            chart: {
-                type: 'column',
-                height: 200,
-                width: 300,
-            },
-            //colors: this.colorOffset(index),
-            title: {
-                text: name,
-                style: {
-                    fontSize: '15px',
-                    fontWeight: 'bold',
-                    color: '#154273',
-                },
-            },
-            xAxis: {
-                type: (options.xAxis as Highcharts.XAxisOptions)?.type,
-                title: {
-                    text: options.xAxis?.title || '',
-                },
-                plotBands:
-                    options.xAxis?.zones?.map((zone: Zone) => ({
-                        from: this.dateStringToTimestamp(zone.from),
-                        to: this.dateStringToTimestamp(zone.to),
-                        color: 'rgba(200, 200, 200, 0.2)',
-                        label: {
-                            text: zone.label,
-                            style: {
-                                color: '#666',
-                                fontSize: '10px',
-                            },
-                        },
-                    })) || [],
-            },
-            yAxis: {
-                title: {
-                    text: options['y-axis']?.title || '',
-                },
-            },
-            series: [
-                {
-                    type: 'column',
-                    name: options.yKey || 'Data',
-                    data: data.map((item) => {
-                        const x =
-                            (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
-                                ? this.dateStringToTimestamp(item[options.xKey] as string)
-                                : item[options.xKey];
-                        const y =
-                            options['y-axis']?.type === 'datetime'
-                                ? this.dateStringToTimestamp(item[options.yKey] as string)
-                                : item[options.yKey];
+//     render() {
+//         const grouped = this.getGroupedData();
 
-                        return [x, y];
-                    }),
-                },
-            ],
-        });
-    }
+//         this.chartIds = grouped.map((_, i) => `chart-${i}`);
 
-    render() {
-        const grouped = this.getGroupedData();
-
-        this.chartIds = grouped.map((_, i) => `chart-${i}`);
-
-        return html`highcharts-small-multiple${this.getHtmlTitle()}
-            <div style="display: grid; gap: 16px;">
-                ${grouped.map((_, index) => html`<div id="${this.chartIds[index]}"></div>`)}
-            </div>
-            ${super.render()}`;
-    }
-}
+//         return html`highcharts-small-multiple${this.getHtmlTitle()}
+//             <div style="display: grid; gap: 16px;">
+//                 ${grouped.map((_, index) => html`<div id="${this.chartIds[index]}"></div>`)}
+//             </div>
+//             ${super.render()}`;
+//     }
+// }

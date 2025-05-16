@@ -60,7 +60,7 @@ export class HighchartsMap extends HighchartsBaseMap {
             ],
         };
 
-        return this.deepmerge(await super.getChartOptions(), chartOptions);
+        return this.mergeOptions(await super.getChartOptions(), chartOptions);
     }
 
     // render() {

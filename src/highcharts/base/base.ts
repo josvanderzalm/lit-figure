@@ -1,15 +1,13 @@
 import type * as Highcharts from 'highcharts';
 import slugify from 'slugify';
 
-import { BaseChart } from '@/common/base/base-figure';
+import { BaseFigure } from '@/common/base/base-figure';
 import lang_nl from '@/highcharts/lang/lang-nl';
 import type { ActionItem } from '@/types';
 
-export class HighchartsBase extends BaseChart {
-    protected highchartsInstance: typeof import('highcharts') | null = null;
-
-    // store the higharts chart instance
-    protected highchartsChart: Highcharts.Chart | null = null;
+export class HighchartsBase extends BaseFigure {
+    highchartsInstance: typeof import('highcharts') | null = null;
+    highchartsChart: Highcharts.Chart | null = null;
 
     protected async getHighchartsInstance(): Promise<typeof import('highcharts')> {
         if (this.highchartsInstance) return this.highchartsInstance;
@@ -22,12 +20,12 @@ export class HighchartsBase extends BaseChart {
     }
 
     // Called after the first render
-    async firstUpdated() {
+    protected async firstUpdated() {
         super.firstUpdated();
     }
 
     // Add generic action buttons
-    getButtons(): ActionItem[] {
+    protected getButtons(): ActionItem[] {
         const baseButtons = super.getButtons(); // Get the base buttons
         const fileName = slugify(this.options.title ?? '');
         const newButtons: ActionItem[] = [

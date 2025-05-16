@@ -2,7 +2,7 @@
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { EchartsBase } from '@/components/echarts/echarts-base';
+import { EchartsBase } from '@/echarts/base/base';
 
 @customElement('echarts-line')
 export class EchartsLine extends EchartsBase {

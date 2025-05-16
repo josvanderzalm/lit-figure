@@ -1,8 +1,8 @@
 import { html } from 'lit';
 
-import { BaseChart } from '@/components/common/base/base-figure';
+import { BaseFigure } from '@/common/base/base-figure';
 
-export class EchartsBase extends BaseChart {
+export class EchartsBase extends BaseFigure {
     render() {
         return html`====${super.render()}`;
     }

@@ -4,17 +4,12 @@ import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
+import { dateStringToTimestamp } from '@/common/utils/data/date-string-to-timestamp';
 import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
 import type { DataItem, Zone } from '@/types';
 
 @customElement('highcharts-column')
 export class HighchartsColumn extends HighchartsBaseChart {
-    private dateStringToTimestamp = (dateString: string): number | string => {
-        const parsedDateString = Date.parse(dateString);
-
-        return isNaN(parsedDateString) ? dateString : parsedDateString;
-    };
-
     // Override to combine base options and additional chart options
     protected async getChartOptions(): Promise<Highcharts.Options> {
         const options = this.options;
@@ -32,8 +27,8 @@ export class HighchartsColumn extends HighchartsBaseChart {
                 },
                 plotBands:
                     options.xAxis?.zones?.map((zone: Zone) => ({
-                        from: this.dateStringToTimestamp(zone.from),
-                        to: this.dateStringToTimestamp(zone.to),
+                        from: dateStringToTimestamp(zone.from),
+                        to: dateStringToTimestamp(zone.to),
                         color: 'rgba(200, 200, 200, 0.2)',
                         label: {
                             text: zone.label,
@@ -56,11 +51,11 @@ export class HighchartsColumn extends HighchartsBaseChart {
                     data: data?.map((item: DataItem) => {
                         const x =
                             (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
-                                ? this.dateStringToTimestamp(item[options.xKey] as string)
+                                ? dateStringToTimestamp(item[options.xKey] as string)
                                 : item[options.xKey];
                         const y =
                             options['y-axis']?.type === 'datetime'
-                                ? this.dateStringToTimestamp(item[options.yKey] as string)
+                                ? dateStringToTimestamp(item[options.yKey] as string)
                                 : item[options.yKey];
 
                         return [x, y];
@@ -69,10 +64,10 @@ export class HighchartsColumn extends HighchartsBaseChart {
             ],
         };
 
-        return this.deepmerge(await super.getChartOptions(), chartOptions);
+        return this.mergeOptions(await super.getChartOptions(), chartOptions);
     }
 
-    // protected override async renderChart(container: HTMLElement): Promise<void> {
+    // override async renderChart(container: HTMLElement): Promise<void> {
     //     const Highcharts = await this.getHighchartsInstance();
 
     //     await Promise.all([import('highcharts/modules/drilldown')]);

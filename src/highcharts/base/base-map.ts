@@ -157,7 +157,7 @@ export class HighchartsBaseMap extends HighchartsBase {
         (this.highchartsBaseMapOptions.colorAxis as Highcharts.ColorAxisOptions).dataClasses =
             dataClasses;
 
-        return this.deepmerge(await super.getChartOptions(), this.highchartsBaseMapOptions);
+        return this.mergeOptions(await super.getChartOptions(), this.highchartsBaseMapOptions);
     }
 
     private getDataClasses(): Highcharts.ColorAxisDataClassesOptions[] {

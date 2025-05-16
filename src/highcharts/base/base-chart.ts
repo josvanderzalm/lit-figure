@@ -10,6 +10,6 @@ export class HighchartsBaseChart extends HighchartsBase {
     };
 
     protected async getChartOptions(): Promise<Highcharts.Options> {
-        return this.deepmerge(await super.getChartOptions(), this.highchartsBaseChartOptions);
+        return this.mergeOptions(await super.getChartOptions(), this.highchartsBaseChartOptions);
     }
 }
