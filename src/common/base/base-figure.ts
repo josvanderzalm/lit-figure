@@ -19,18 +19,17 @@ export class BaseFigure extends LitElement {
         h1,
         h2 {
             color: rgb(21, 66, 115);
-            line-height: 1.1em;
+            line-height: 1em;
             margin: 0;
         }
         h1 {
-            font-size: 1.1rem;
+            font-size: 1.06rem;
             font-weight: bold;
-            margin-bottom: 0.2em;
+            margin-bottom: 0em;
         }
         h2 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: normal;
-            color: rgb(70, 70, 70);
             margin-top: 0;
         }
     `;
