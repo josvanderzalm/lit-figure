@@ -7,6 +7,10 @@ import { registry } from '../../registry';
 
 @customElement('rivm-smdv-figure')
 export class RivmSmvdFigure extends LitElement {
+    createRenderRoot() {
+        return this.attachShadow({ mode: 'closed' });
+    }
+
     static styles = css`
         :host {
             display: block;
