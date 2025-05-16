@@ -51,46 +51,46 @@ export type ButtonDef = {
     icon?: string; // optional, for styling
 };
 
-// Available color schemes
+// Available color scheme' |
 export type ColorScheme =
     | 'Standard'
     | 'Gender'
     | 'GenderAlt'
-    | 'Spectral'
-    | 'RdYlGn'
-    | 'RdBu'
+    | 'BrBG'
     | 'PiYG'
     | 'PRGn'
-    | 'RdYlBu'
-    | 'BrBG'
-    | 'RdGy'
     | 'PuOr'
-    | 'Set2'
+    | 'RdBu'
+    | 'RdGy'
+    | 'RdYlBu'
+    | 'RdYlGn'
+    | 'Spectral'
     | 'Accent'
-    | 'Set1'
-    | 'Set3'
     | 'Dark2'
     | 'Paired'
-    | 'Pastel2'
     | 'Pastel1'
+    | 'Pastel2'
+    | 'Set1'
+    | 'Set2'
+    | 'Set3'
+    | 'Blues'
+    | 'BuGn'
+    | 'BuPu'
+    | 'GnBu'
+    | 'Greens'
+    | 'Greys'
+    | 'Oranges'
     | 'OrRd'
     | 'PuBu'
-    | 'BuPu'
-    | 'Oranges'
-    | 'BuGn'
-    | 'YlOrBr'
-    | 'YlGn'
-    | 'Reds'
-    | 'RdPu'
-    | 'Greens'
-    | 'YlGnBu'
-    | 'Purples'
-    | 'GnBu'
-    | 'Greys'
-    | 'YlOrRd'
+    | 'PuBuGn'
     | 'PuRd'
-    | 'Blues'
-    | 'PuBuGn';
+    | 'Purples'
+    | 'RdPu'
+    | 'Reds'
+    | 'YlGn'
+    | 'YlGnBu'
+    | 'YlOrBr'
+    | 'YlOrRd';
 
 // data array
 export type DataArray = { [key: string]: string | number }[];
@@ -183,7 +183,7 @@ export interface Options {
     /** Field used to group data into series */
     seriesKey?: string;
 
-    /** Source reference (e.g., URL or string) */
+    /** Source/credits  */
     source?: string;
 
     /** Subtitle or additional context */
