@@ -1,1 +1,16 @@
-{}
+{
+    "dataSrc": "http://localhost:5173/data/sm-aantal-meldingen-kinkhoest.json",
+    "xKey": "jaar",
+    "yKey": "value",
+    "seriesKey": "lftcat",
+    "type": "small-multiple",
+    "title": "Aantal meldingen van kinkhoest per 100.000 inwoners per leeftijdsgroep, 2004-2024",
+    "subtitle": "Meldingen voor 2024 zijn tot 16 december",
+    "source": "Bron: RIVM, Osiris",
+    "xAxis": {
+        "title": "jaar"
+    },
+    "yAxis": {
+        "title": "value"
+    }
+}

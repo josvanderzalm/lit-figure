@@ -1,0 +1,88 @@
+import type * as Highcharts from 'highcharts';
+import { html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+
+import { dateStringToTimestamp } from '@/common/utils/data/date-string-to-timestamp';
+import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
+import type { ActionItem, DataItem, Zone } from '@/types';
+
+@customElement('highcharts-composite')
+export class HighchartsLine extends HighchartsBaseChart {
+    // Override to combine base options and additional chart options
+    protected async getChartOptions(): Promise<Highcharts.Options> {
+        const options = this.options;
+        const data = this.getFigureData();
+        const chartOptions: Highcharts.Options = {
+            chart: {
+                type: options.type || 'line',
+                width: options.width === '100%' ? null : parseInt(options.width as string, 10),
+                height: parseInt(options.height as string, 10) || 400,
+            },
+            xAxis: {
+                type: (options.xAxis as Highcharts.XAxisOptions)?.type,
+                title: {
+                    text: options.xAxis?.title || '',
+                },
+                plotBands:
+                    options.xAxis?.zones?.map((zone: Zone) => ({
+                        from: dateStringToTimestamp(zone.from),
+                        to: dateStringToTimestamp(zone.to),
+                        color: 'rgba(200, 200, 200, 0.2)',
+                        label: {
+                            text: zone.label,
+                            style: {
+                                color: '#666',
+                                fontSize: '10px',
+                            },
+                        },
+                    })) || [],
+            },
+            yAxis: {
+                title: {
+                    text: options['y-axis']?.title || '',
+                },
+            },
+            series: [
+                {
+                    type: 'line',
+                    name: options.yKey || 'Data',
+                    data: data.map((item: DataItem) => {
+                        const x =
+                            (options.xAxis as Highcharts.XAxisOptions)?.type === 'datetime'
+                                ? dateStringToTimestamp(item[options.xKey] as string)
+                                : item[options.xKey];
+                        const y =
+                            options['y-axis']?.type === 'datetime'
+                                ? dateStringToTimestamp(item[options.yKey] as string)
+                                : item[options.yKey];
+
+                        return [x, y];
+                    }),
+                },
+            ],
+        };
+
+        return this.mergeOptions(super.getChartOptions(), chartOptions);
+    }
+
+    // Remove buttons that are not compatible with this chart type
+    protected override getButtons(): ActionItem[] {
+        return this.unsetButtons(super.getButtons(), [
+            'download-png',
+            'download-svg',
+            'download-pdf',
+        ]);
+    }
+
+    // Override to import the Highcharts library and render the chart
+    protected override async renderChart(container: HTMLElement): Promise<void> {
+        const Highcharts = await this.getHighchartsInstance();
+
+        await Promise.all([import('highcharts/modules/drilldown')]);
+        Highcharts.chart(container, await this.getChartOptions());
+    }
+
+    render() {
+        return html`${super.render()}`;
+    }
+}

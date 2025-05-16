@@ -1,2 +1,1 @@
-// src/main.ts
-import './components/rivm-smdv-figure';
+import './common/components/figure/figure';

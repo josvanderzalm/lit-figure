@@ -16,6 +16,7 @@
         "format:prettier": "prettier '**/*.{cjs,html,js,json,md,ts}' --ignore-path ./.prettierignore --write"
     },
     "dependencies": {
+        "@open-wc/scoped-elements": "^3.0.5",
         "deepmerge": "^4.3.1",
         "echarts": "^5.6.0",
         "es-toolkit": "^1.37.2",
