@@ -211,7 +211,7 @@ export class BaseFigure extends ScopedElementsMixin(LitElement) {
     // Main render method
     render() {
         return html`
-            <!--${this.getHtmlTitle()}-->
+            ${this.getHtmlTitle()}
             <div id="container"></div>
             <action-menu .buttons=${this.getButtons()}></action-menu>
         `;

@@ -66,13 +66,6 @@ export class HighchartsColumn extends HighchartsBaseChart {
         return this.mergeOptions(await super.getChartOptions(), chartOptions);
     }
 
-    // override async renderChart(container: HTMLElement): Promise<void> {
-    //     const Highcharts = await this.getHighchartsInstance();
-
-    //     await Promise.all([import('highcharts/modules/drilldown')]);
-    //     Highcharts.chart(container, this.getChartOptions());
-    // }
-
     render() {
         return html`<p>highcharts-column</p>
             ${super.render()}`;
