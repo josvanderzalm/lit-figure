@@ -3,14 +3,17 @@ import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { colorOffset, importColorScheme } from '@/color/utils';
-import { stripPathSegments } from '@/common/utils';
-
-import '@/common/components/action-menu/menu';
-
-import { loadROSansFonts } from '@/common/utils';
+import { ActionMenu } from '@/common/components/action-menu/menu';
+import { loadROSansFonts, stripPathSegments } from '@/common/utils';
 import type { ActionItem, ColorScheme, DataArray, GroupActionItem, Options } from '@/types';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
-export class BaseFigure extends LitElement {
+export class BaseFigure extends ScopedElementsMixin(LitElement) {
+    static get scopedElements() {
+        return {
+            'action-menu': ActionMenu,
+        };
+    }
     static styles = css`
         :host {
             font-family: 'RO Sans', Calibri, Verdana, sans-serif;
@@ -208,8 +211,8 @@ export class BaseFigure extends LitElement {
     // Main render method
     render() {
         return html`
-            ${this.getHtmlTitle()}
-            <div id="container" style="width: 100%; height: 100%"></div>
+            <!--${this.getHtmlTitle()}-->
+            <div id="container"></div>
             <action-menu .buttons=${this.getButtons()}></action-menu>
         `;
     }

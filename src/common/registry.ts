@@ -2,55 +2,80 @@ import { html } from 'lit';
 
 import type { RendererProps } from '@/types';
 
-export const registry = {
+export const rivmSmvdRegistry = {
     common: {
         sandbox: async () => {
-            await import('./components/sandbox/wrapper.js');
+            const { SandboxWrapper } = await import('./components/sandbox/sandbox.js');
 
-            return (props: RendererProps) =>
-                html`<sandbox-iframe .options=${props.options ?? {}}></sandbox-iframe>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<common-sandbox .options=${props.options ?? {}}></common-sandbox>`,
+                module: SandboxWrapper,
+            };
         },
     },
     highcharts: {
         column: async () => {
-            await import('../highcharts/components/column.js');
+            const { HighchartsColumn } = await import('../highcharts/components/column.js');
 
-            return (props: RendererProps) =>
-                html`<highcharts-column .options=${props.options ?? {}}></highcharts-column>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<highcharts-column .options=${props.options ?? {}}></highcharts-column>`,
+                module: HighchartsColumn,
+            };
         },
         composite: async () => {
-            await import('../highcharts/components/composite.js');
+            const { HighchartsComposite } = await import('../highcharts/components/composite.js');
 
-            return (props: RendererProps) =>
-                html`<highcharts-composite .options=${props.options ?? {}}></highcharts-composite>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<highcharts-composite
+                        .options=${props.options ?? {}}
+                    ></highcharts-composite>`,
+                module: HighchartsComposite,
+            };
         },
         line: async () => {
-            await import('../highcharts/components/line.js');
+            const { HighchartsLine } = await import('../highcharts/components/line.js');
 
-            return (props: RendererProps) =>
-                html`<highcharts-line .options=${props.options ?? {}}></highcharts-line>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<highcharts-line .options=${props.options ?? {}}></highcharts-line>`,
+                module: HighchartsLine,
+            };
         },
         map: async () => {
-            await import('../highcharts/components/map.js');
+            const { HighchartsMap } = await import('../highcharts/components/map.js');
 
-            return (props: RendererProps) =>
-                html`<highcharts-map .options=${props.options ?? {}}></highcharts-map>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<highcharts-map .options=${props.options ?? {}}></highcharts-map>`,
+                module: HighchartsMap,
+            };
         },
         'small-multiple': async () => {
-            await import('../highcharts/components/small-multiple.js');
+            const { HighchartsSmallMultiple } = await import(
+                '../highcharts/components/small-multiple.js'
+            );
 
-            return (props: RendererProps) =>
-                html`<highcharts-small-multiple
-                    .options=${props.options ?? {}}
-                ></highcharts-small-multiple>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<highcharts-small-multiple
+                        .options=${props.options ?? {}}
+                    ></highcharts-small-multiple>`,
+                module: HighchartsSmallMultiple,
+            };
         },
     },
     echarts: {
         line: async () => {
-            await import('../echarts/components/line.js');
+            const { EchartsLine } = await import('../echarts/components/line.js');
 
-            return (props: RendererProps) =>
-                html`<echarts-line .options=${props.options ?? {}}></echarts-line>`;
+            return {
+                template: (props: RendererProps) =>
+                    html`<echarts-line .options=${props.options ?? {}}></echarts-line>`,
+                module: EchartsLine,
+            };
         },
     },
 };

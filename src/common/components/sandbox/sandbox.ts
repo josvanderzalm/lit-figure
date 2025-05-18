@@ -1,9 +1,9 @@
 import { html, LitElement } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 
 import { Options } from '@/types';
 
-@customElement('sandbox-iframe')
+// SCOPED ELEMENT, DO NOT ADD: @customElement('sandbox-iframe')
 export class SandboxWrapper extends LitElement {
     @property({ type: Object }) options: Options = {};
 

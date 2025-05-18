@@ -1,5 +1,7 @@
 import type { Options } from './src/types/index.ts';
 
+import '@webcomponents/scoped-custom-element-registry';
+
 const mutationObserver = new MutationObserver(sendHeightToParent);
 const resizeObserver = new ResizeObserver(sendHeightToParent);
 let figureWrapperElement: (HTMLElement & { options: Options }) | null = null;
@@ -38,7 +40,9 @@ function addFigureWrapper(options: Options) {
         document.title = options.title;
     }
 
-    figureWrapperElement = Object.assign(document.createElement('rivm-smdv-figure'), { options });
+    figureWrapperElement = Object.assign(document.createElement('rivm-smdv-figure-loader'), {
+        options,
+    });
     document.body.appendChild(figureWrapperElement);
 }
 
