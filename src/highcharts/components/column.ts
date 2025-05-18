@@ -2,13 +2,12 @@
 
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
 
 import { dateStringToTimestamp } from '@/common/utils/data/date-string-to-timestamp';
 import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
 import type { DataItem, Zone } from '@/types';
 
-@customElement('highcharts-column')
+// SCOPED ELEMENT, DO NOT ADD: @customElement('highcharts-column')
 export class HighchartsColumn extends HighchartsBaseChart {
     // Override to combine base options and additional chart options
     protected async getChartOptions(): Promise<Highcharts.Options> {
@@ -66,13 +65,6 @@ export class HighchartsColumn extends HighchartsBaseChart {
 
         return this.mergeOptions(await super.getChartOptions(), chartOptions);
     }
-
-    // override async renderChart(container: HTMLElement): Promise<void> {
-    //     const Highcharts = await this.getHighchartsInstance();
-
-    //     await Promise.all([import('highcharts/modules/drilldown')]);
-    //     Highcharts.chart(container, this.getChartOptions());
-    // }
 
     render() {
         return html`<p>highcharts-column</p>

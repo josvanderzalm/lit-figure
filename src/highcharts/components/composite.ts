@@ -1,13 +1,12 @@
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
 
 import { dateStringToTimestamp } from '@/common/utils/data/date-string-to-timestamp';
 import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
 import type { ActionItem, DataItem, Zone } from '@/types';
 
-@customElement('highcharts-composite')
-export class HighchartsLine extends HighchartsBaseChart {
+// SCOPED ELEMENT, DO NOT ADD: @customElement('highcharts-composite')
+export class HighchartsComposite extends HighchartsBaseChart {
     // Override to combine base options and additional chart options
     protected async getChartOptions(): Promise<Highcharts.Options> {
         const options = this.options;

@@ -1,12 +1,11 @@
 import type * as Highcharts from 'highcharts';
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
 
 import { dateStringToTimestamp } from '@/common/utils/data/date-string-to-timestamp';
 import { HighchartsBaseChart } from '@/highcharts/base/base-chart';
 import type { DataItem, Zone } from '@/types';
 
-@customElement('highcharts-line')
+// SCOPED ELEMENT, DO NOT ADD: @customElement('highcharts-line')
 export class HighchartsLine extends HighchartsBaseChart {
     // Override to combine base options and additional chart options
     protected async getChartOptions(): Promise<Highcharts.Options> {
@@ -64,14 +63,6 @@ export class HighchartsLine extends HighchartsBaseChart {
 
         return this.mergeOptions(await super.getChartOptions(), chartOptions);
     }
-
-    // override async loadHighchartsModules(
-    //     Highcharts,
-    // ): Promise<typeof import('highcharts')> {
-    //     await super.loadHighchartsModules(Highcharts);
-
-    //     return Highcharts;
-    // }
 
     render() {
         return html`<p>highcharts-line</p>

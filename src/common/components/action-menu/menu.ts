@@ -1,9 +1,9 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 
 import type { ActionItem, ButtonActionItem, GroupActionItem } from '@/types';
 
-@customElement('action-menu')
+// SCOPED ELEMENT, DO NOT ADD: @customElement('action-menu')
 export class ActionMenu extends LitElement {
     static styles = css`
         .menu {

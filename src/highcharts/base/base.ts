@@ -90,8 +90,6 @@ export class HighchartsBase extends BaseFigure {
             typeof Highcharts.mapChart === 'function' ? Highcharts.mapChart : Highcharts.chart;
         const highchartsOptions = await this.getChartOptions();
 
-        console.log('===highchartsOptions===', highchartsOptions);
-
         this.highchartsChart = chartMethod(container, highchartsOptions);
     }
 

@@ -1,9 +1,8 @@
 import type * as Highcharts from 'highcharts';
-import { customElement } from 'lit/decorators.js';
 
 import { HighchartsBaseMap } from '@/highcharts/base/base-map';
 
-@customElement('highcharts-map')
+// SCOPED ELEMENT, DO NOT ADD: @customElement('highcharts-map')
 export class HighchartsMap extends HighchartsBaseMap {
     private geojson: Highcharts.GeoJSON = null;
 
@@ -25,8 +24,6 @@ export class HighchartsMap extends HighchartsBaseMap {
     }
 
     protected override async getChartOptions(): Promise<Highcharts.Options> {
-        console.log('this.dataSet', this.options.dataSet);
-
         const chartOptions: Highcharts.Options = {
             chart: {
                 map: this.geojson,
@@ -62,10 +59,4 @@ export class HighchartsMap extends HighchartsBaseMap {
 
         return this.mergeOptions(await super.getChartOptions(), chartOptions);
     }
-
-    // render() {
-    //     return html`
-    //         ${!this.geojson ? html`<p>Bezig met laden van kaartgegevens...</p>` : super.render()}
-    //     `;
-    // }
 }
